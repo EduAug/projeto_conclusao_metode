@@ -1,0 +1,45 @@
+<h2 class="text-center">{{ (operation === 'ADD') ? "ADICIONAR A LISTA" : (operation === 'REMOVE') ? "REMOVER DA LISTA" : "ITERAÇÃO" }}</h2>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 d-flex flex-column align-items-center">
+        <ng-container *ngIf="operation !== 'LOOP'; else regularOperation">
+            <mat-form-field appearance="fill" class="w-300">
+                <mat-label>{{ operation === 'FOREACH' ? 'List to iterate' : 'List to modify' }}</mat-label>
+                <mat-select [(ngModel)]="targetVar" (selectionChange)="onTargetVarChange()">
+                    <mat-option *ngFor="let vari of availableVars" [value]="vari">{{ vari }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container *ngIf="operation !== 'FOREACH'; else forEachTemplate">
+                <mat-form-field appearance="fill" class="w-300">
+                    <mat-label>Custom value</mat-label>
+                    <input matInput [(ngModel)]="customVal" [disabled]="selectedVar !== ''">
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill" class="w-300">
+                    <mat-label>Or variable</mat-label>
+                    <mat-select [(ngModel)]="selectedVar" [disabled]="customVal !== ''">
+                        <mat-option *ngFor="let vari of matchingVars" [value]="vari">{{ vari }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ng-container>
+
+            <ng-template #forEachTemplate class="text-center">
+            <h2 *ngIf="targetVar">FOR EACH "item" IN {{ targetVar }}</h2>
+            </ng-template>
+        </ng-container>
+  
+        <ng-template #regularOperation>
+          <mat-form-field appearance="fill" class="w-300">
+            <mat-label>Enter number of repetitions</mat-label>
+            <input matInput type="number" [(ngModel)]="loops" min="1">
+          </mat-form-field>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+  <button mat-button (click)="addOperation()" [disabled]="!isInputValid()">Adicionar</button>
+</div>

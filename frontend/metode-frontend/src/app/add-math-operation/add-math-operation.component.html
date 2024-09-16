@@ -1,0 +1,47 @@
+<div class="container-fluid text-center">
+    <h2 class="text-center">OPERAÇÃO</h2>
+    <div class="row">
+        <div class="col-md-5">
+            <mat-form-field appearance="fill">
+                <mat-label>{{ isMathOp() ? "Variável para alterar" : "Variável para comparar" }}</mat-label>
+                <mat-select [(ngModel)]="targetVar">
+                    <mat-option *ngFor="let vari of availableVars" [value]="vari">{{ vari }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+            <h1>{{ operation }}</h1>
+        </div>
+
+        <div class="col-md-5">
+            <ng-container *ngIf="isTargetVarBool(); else regularInputs">
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecione valor booleano</mat-label>
+                    <mat-select [(ngModel)]="booleanVal">
+                        <mat-option [value]="true">True</mat-option>
+                        <mat-option [value]="false">False</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ng-container>
+
+            <ng-template #regularInputs>
+                <mat-form-field appearance="fill">
+                    <mat-label>Valor customizado</mat-label>
+                    <input matInput [(ngModel)]="customVal" [disabled]="selectedVar !== ''">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Ou variável</mat-label>
+                    <mat-select [(ngModel)]="selectedVar" [disabled]="customVal !== ''">
+                        <mat-option *ngFor="let vari of availableVars" [value]="vari">{{ vari }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ng-template>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="closeDialog()">Cancelar</button>
+        <button mat-button (click)="addOperation()" [disabled]="!isInputValid()">Adicionar</button>
+    </div>
+</div>

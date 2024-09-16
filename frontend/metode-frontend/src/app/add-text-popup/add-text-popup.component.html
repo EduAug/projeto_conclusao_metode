@@ -1,0 +1,11 @@
+<h2 class="text-center">Texto livre</h2>
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Texto</mat-label>
+        <input matInput [(ngModel)]="newItem">
+    </mat-form-field>
+</div>
+<div>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button mat-button (click)="addItem()">Adicionar</button>
+</div>

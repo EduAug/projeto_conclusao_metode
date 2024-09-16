@@ -1,0 +1,27 @@
+<h2 class="text-center">Variável</h2>
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="newItemName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="newItemType" (selectionChange)="onTypeChange()">
+            <mat-option *ngFor="let type of variableTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="isAList">    
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo da lista</mat-label>
+            <mat-select [(ngModel)]="listItemType">
+                <mat-option *ngFor="let listType of listVariableTypes" [value]="listType">{{ listType }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button [disabled]="!isValid()" mat-button (click)="addItem()">Adicionar</button>
+</div>
