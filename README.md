@@ -1,2 +1,2 @@
-# projeto_conclusao_metode
-Repositório público para o Projeto de Conclusão do Curso, referente ao website "Metode".
+# Projeto Tecnologico em Desenvolvimento de Sistemas: Metode
+Repositório público para o Projeto Tecnologico em Desenvolvimento de Sistemas, referente ao website "Metode".
