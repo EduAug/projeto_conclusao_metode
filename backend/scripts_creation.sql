@@ -10,8 +10,8 @@ create table if not exists Codigo(
 	Id SERIAL primary key,
 	IdUsuario INT not null,
 	Titulo VARCHAR(255) not null,
-	Variaveis JSONB,
-	Codigo JSONB,
+	Variaveis TEXT[] DEFAULT '{}',
+	Codigo TEXT[] DEFAULT '{}',
 	constraint codigo_fk_usuario
 		foreign key (IdUsuario)
 		references Usuario (Id)
