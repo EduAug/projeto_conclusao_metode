@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import cross_origin
 from apigemini import gemi_answer
-from database import create_user, verify_user, update_user, delete_user, create_code, get_all_codes, get_code_details
+from database import create_user, verify_user, update_user, delete_user, create_code, get_all_codes, get_code_details, update_codigo, delete_codigo
 import config
 import jwt
 
@@ -170,16 +170,16 @@ def save_code():
     user_id= decoded['id']
 
     data= request.get_json()
-    titulo= data.get('titulo')
+    title= data.get('title')
     varis= data.get('varis', [])
     code= data.get('code', [])
-    if not titulo:
+    if not title:
         return jsonify({"erro": "Titulo obrigatorio"}), 400
 
     if not isinstance(varis, list) or not isinstance(code, list):
         return jsonify({"erro": "Variaveis/Codigo nao e array de texto"}), 400
 
-    code_id= create_code(user_id, titulo, varis, code)
+    code_id= create_code(user_id, title, varis, code)
     if code_id:
         return jsonify({"mensagem": "Codigo salvo com sucesso"}), 201
     else:
@@ -227,6 +227,57 @@ def get_code_data(code_id):
         return jsonify(code_details), 200
     else:
         return jsonify({"erro": "Codigo nao encontrado"}), 404
+
+
+#Atualizar um código
+@app.route('/updcode/<int:code_id>', methods=['PUT'])
+@cross_origin()
+def update_code(code_id):
+    auth_header= request.headers.get('Authorization')
+    if not auth_header:
+        return jsonify({"erro": "Autorização faltante"}), 401
+        
+    token= auth_header.split(" ")[1]
+    decoded= decode_token(token)
+    if "erro" in decoded:
+        return jsonify(decoded), 401
+
+    user_id= decoded['id']
+
+    data= request.get_json()
+    title= data.get('title')
+    varis= data.get('varis', [])
+    code= data.get('code', [])
+
+    updated= update_codigo(code_id, user_id, title, varis, code)
+
+    if updated:
+        return jsonify({"mensagem": "Codigo atualizado com sucesso"}), 200
+    else:
+        return jsonify({"erro": "Erro ao atualizar codigo"}), 500
+
+
+#Apagar um codigo
+@app.route('/deletecode/<int:code_id>', methods=['DELETE'])
+@cross_origin()
+def delete_code(code_id):
+    auth_header= request.headers.get('Authorization')
+    if not auth_header:
+        return jsonify({"erro": "Autorização faltante"}), 401
+        
+    token= auth_header.split(" ")[1]
+    decoded= decode_token(token)
+    if "erro" in decoded:
+        return jsonify(decoded), 401
+
+    user_id= decoded['id']
+
+    deleted= delete_codigo(code_id, user_id)
+
+    if deleted:
+        return jsonify({"mensagem": "Codigo deletado com sucesso"}), 200
+    else:
+        return jsonify({"erro": "Erro ao deletar codigo"}), 500
 
 
 if __name__== '__main__':

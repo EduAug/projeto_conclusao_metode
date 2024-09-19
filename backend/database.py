@@ -209,3 +209,54 @@ def get_code_details(code_id):
     finally:
         cursor.close()
         conn.close()
+
+def update_codigo(id, user_id, title=None, varis=None, code=None):
+    conn= psycopg2.connect(config.connection_string)
+    cursor= conn.cursor()
+
+    query= "UPDATE Codigo SET "
+    param= []
+
+    if title:
+        query+= "Titulo = %s, "
+        param.append(title)
+    if varis:
+        query+= "Variaveis = %s, "
+        param.append(varis)
+    if code:
+        query+= "Codigo = %s, "
+        param.append(code)
+
+    query= query.rstrip(", ") + " WHERE Id = %s AND IdUsuario = %s;"
+    param.append(id)
+    param.append(user_id)
+    try:
+        cursor.execute(query, tuple(param))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print("Erro ao atualizar codigo: ", e)
+        return False
+    finally:
+        cursor.close()
+        conn.close()
+
+def delete_codigo(id, user_id):
+    conn= psycopg2.connect(config.connection_string)
+    cursor= conn.cursor()
+
+    query="""
+    DELETE FROM Codigo WHERE Id = %s AND IdUsuario = %s;
+    """
+
+    try:
+        cursor.execute(query, (id, user_id))
+        conn.commit()
+        return True
+    except Exception as e:
+        print("Erro ao deletar codigo: ", e)
+        return False
+    finally:
+        cursor.close()
+        conn.close()
