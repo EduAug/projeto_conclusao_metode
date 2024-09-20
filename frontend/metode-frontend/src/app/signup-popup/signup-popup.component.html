@@ -1,0 +1,21 @@
+<h2>Cadastrar</h2>
+<div>
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="signupData.email" placeholder="Email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nome de exibição</mat-label>
+        <input matInput [(ngModel)]="signupData.dname" placeholder="Nome de exibição" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="signupData.pwd" type="password" placeholder="Senha" required>
+    </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()">Cancelar</button>
+    <button mat-button (click)="onSubmit()">Cadastrar</button>
+</mat-dialog-actions>
