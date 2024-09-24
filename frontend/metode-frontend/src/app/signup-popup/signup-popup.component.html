@@ -17,5 +17,6 @@
 </div>
 <mat-dialog-actions align="end">
     <button mat-button (click)="onClose()">Cancelar</button>
-    <button mat-button (click)="onSubmit()">Cadastrar</button>
+    <button mat-button [disabled]="loading || !signupData.email || !signupData.pwd || !signupData.dname" (click)="onSubmit()">Cadastrar</button>
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>
 </mat-dialog-actions>

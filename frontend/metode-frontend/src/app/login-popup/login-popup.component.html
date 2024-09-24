@@ -1,16 +1,18 @@
 <h2>Login</h2>
 <div>
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="outline" class="w-100 email-field">
         <mat-label>Email</mat-label>
         <input matInput [(ngModel)]="loginData.email" placeholder="Email" required>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="outline" class="w-100 password-field">
         <mat-label>Senha</mat-label>
         <input matInput [(ngModel)]="loginData.pwd" type="password" placeholder="Senha" required>
     </mat-form-field>
+
+    <p *ngIf="loginFailed" class="error-message text-center">Login Falhou. Confira seu email e senha <br>(Letras maísuculas inclusive).</p>
 </div>
 <mat-dialog-actions align="end">
     <button mat-button (click)="onClose()">Cancelar</button>
-    <button mat-button (click)="onSubmit()">Entrar</button>
+    <button mat-button [disabled]="loading || !loginData.email || !loginData.pwd" (click)="onSubmit()">Entrar</button>
 </mat-dialog-actions>

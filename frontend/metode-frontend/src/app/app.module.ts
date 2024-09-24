@@ -11,6 +11,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LabPageComponent } from './lab-page/lab-page.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { SignupPopupComponent } from './signup-popup/signup-popup.component';
+import { ChatWindowComponent } from './chat-window/chat-window.component';
+import { ManagePageComponent } from './manage-page/manage-page.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ChatWindowComponent } from './chat-window/chat-window.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,8 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
     LabPageComponent,
     LoginPopupComponent,
     SignupPopupComponent,
-    ChatWindowComponent
+    ChatWindowComponent,
+    ManagePageComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideAnimationsAsync('noop')

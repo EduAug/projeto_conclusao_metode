@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const API_URL= 'http://127.0.0.1:5000';
@@ -22,5 +22,19 @@ export class GeminiService {
     };
 
     return this.https.post<any>(`${API_URL}/chat`, payload);
+  }
+
+  signup(signupData: { email: string, dname: string, pwd: string}){
+    return this.https.post<any>(`${API_URL}/signup`, signupData);
+  }
+
+  login(loginData: { email: string, pwd: string }){
+    //console.log("Token captado");
+    return this.https.post<any>(`${API_URL}/login`, loginData);
+  }
+  getDName(){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.get<any>(`${API_URL}/displayname`, { headers });
   }
 }
