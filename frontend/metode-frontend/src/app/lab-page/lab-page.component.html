@@ -2,6 +2,23 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
+          <h3>Operações e Funções Padrão
+            <i 
+            class="bi bi-question-circle" 
+            matTooltip="Aqui estão as operações padrão. Tanto matemáticas, quanto lógicas, caso não encontre variáveis em alguma operação, provavelmente aquele tipo não seja suportado. Clique para adicionar ao código, ou abrir uma janela de criação, com base na operação."
+            ></i>
+          </h3>
+          <div
+          cdkDropList
+          #thirdList="cdkDropList"
+          [cdkDropListData]="operations"
+          class="list-body overflow-auto"
+          [cdkDropListEnterPredicate]="canEnterVariableOperationList">
+            <div (click)="addFunctionToCode(operacao)" class="functoper" *ngFor="let operacao of operations" cdkDragDisabled="true">{{ operacao }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
           <h3>Código
             <i 
             class="bi bi-question-circle" 
@@ -57,23 +74,6 @@
             </div>
           </div>  
         </div>
-  
-        <div class="col-md-4">
-          <h3>Operações e Funções Padrão
-            <i 
-            class="bi bi-question-circle" 
-            matTooltip="Aqui estão as operações padrão. Tanto matemáticas, quanto lógicas, caso não encontre variáveis em alguma operação, provavelmente aquele tipo não seja suportado. Clique para adicionar ao código, ou abrir uma janela de criação, com base na operação."
-            ></i>
-          </h3>
-          <div
-          cdkDropList
-          #thirdList="cdkDropList"
-          [cdkDropListData]="operations"
-          class="list-body overflow-auto"
-          [cdkDropListEnterPredicate]="canEnterVariableOperationList">
-            <div (click)="addFunctionToCode(operacao)" class="functoper" *ngFor="let operacao of operations" cdkDragDisabled="true">{{ operacao }}</div>
-          </div>
-        </div>
       </div>
     </div>
     
@@ -85,3 +85,4 @@
     <button class="btn" type="submit" [disabled]="!isFormValid()">Gerar</button>
   </form>
   <pre class="answer overflow-auto" *ngIf="answer">{{ answer }}</pre>
+  <app-chat-window></app-chat-window>

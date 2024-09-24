@@ -41,11 +41,11 @@ export class LabPageComponent {
     return drag.dropContainer.id !== 'userCode';
   }
 
-  constructor(private geminiService: GeminiService, public dialog: MatDialog){}
+  constructor(private gptService: GeminiService, public dialog: MatDialog){}
   
   //Libera o botão para perguntar apenas com conteúdo
   isFormValid(): boolean { 
-    return this.question.length > 0 && this.selectedLang !== '';
+    return this.question.length > 10 && this.selectedLang !== '';
   }
 
   //Evento de drop, biblioteca do Angular
@@ -74,29 +74,37 @@ export class LabPageComponent {
     switch (itemToRemove) {
       case "SE":
         let i1= this.items.indexOf("SE");
-        console.log(i1);
         this.items.splice(i1, 1);
-        let i2= this.items.indexOf("ENTÃO");
-        console.log(i2);
-        this.items.splice(i2, 1);
-        let i3= this.items.indexOf("SENÃO CASO");
-        console.log(i3);
-        this.items.splice(i3, 1);
-        let i4= this.items.indexOf("ENTÃO");
-        console.log(i4);
-        this.items.splice(i4, 1);
-        let i5= this.items.indexOf("SENÃO");
-        console.log(i5);
-        this.items.splice(i5, 1);
-        let i6= this.items.indexOf("FIM-SE");
-        console.log(i6);
-        this.items.splice(i6, 1);
 
+        let i2= this.items.indexOf("ENTÃO");
+        this.items.splice(i2, 1);
+
+        let i3= this.items.indexOf("SENÃO CASO");
+        this.items.splice(i3, 1);
+
+        let i4= this.items.indexOf("ENTÃO");
+        this.items.splice(i4, 1);
+
+        let i5= this.items.indexOf("SENÃO");
+        this.items.splice(i5, 1);
+
+        let i6= this.items.indexOf("FIM-SE");
+        this.items.splice(i6, 1);
+        
+        this.question="";
+        this.items.forEach(e => {
+          this.question+= `${e} `;
+        });
         break;
       default:
         break;
     }
     this.items.splice(index, 1);
+
+    this.question="";
+    this.items.forEach(e => {
+      this.question+= `${e} `;
+    });
   }
 
   //Ao clicar duas vezes na variável, remove ela
@@ -258,7 +266,7 @@ export class LabPageComponent {
 
   //Post para enviar solicitação ao endpoint
   askGemini() {
-    this.geminiService.askDQuestion(`Por favor, retorne o seguinte pseudocódigo em ${ this.selectedLang }, mencionando using/import/etc, SEM comentários explicativos, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis. Não crie strings adicionais quando necessário.\n${ this.question }.`)
+    this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays" devem ser considerados como listas. "DECLARE" representa um input do usuário. ${ this.question }.`)
       .subscribe(rspns=> {
         let rawresponse = rspns.response;
         if(rawresponse.startsWith('```') && rawresponse.endsWith('```')){

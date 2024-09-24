@@ -1,0 +1,20 @@
+<div class="chat-window" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="chat-header" (click)="toggleExpand()">
+        <p>{{ 'Pergunte ao professor' }}</p>
+        <hr>
+    </div>
+
+    <div class="chat-body m-1" *ngIf="isExpanded">
+        <div class="chat-messages" #chatMessages>
+            <p *ngFor="let msg of messages; let i = index" [ngClass]="{ 'user-message border rounded text-end': !isUserMessage(msg), 'system-message border rounded text-start': isUserMessage(msg) }">{{ msg }}</p>
+        </div>
+    </div>
+    
+    <div *ngIf="loading" class="loading-indicator">
+        <p>Hmm... Um momento...</p>
+    </div>
+    <div class="chat-input">
+        <input type="text" placeholder="Tire suas dúvidas relacionadas a código" [(ngModel)]="message">
+        <button (click)="sendMessage()" [disabled]="loading">Enviar</button>
+    </div>
+</div>

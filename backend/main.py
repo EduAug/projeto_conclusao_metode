@@ -1,17 +1,47 @@
 from flask import Flask, request, jsonify
 from flask_cors import cross_origin
-from apigemini import gemi_answer
+from apigpt import gpt_answer, chat_with_professor
 from database import create_user, verify_user, update_user, delete_user, create_code, get_all_codes, get_code_details, update_codigo, delete_codigo
 import config
 import jwt
 
 app= Flask(__name__)
 
-#API Gemini
+#API GPT
 @app.route('/ask', methods=['POST'])
 @cross_origin()
-def ask_gemini():
-    return gemi_answer()
+def ask_gpt():
+    data= request.get_json()
+
+    prompt= data.get('prompt')
+
+    if not prompt:
+        return jsonify({"erro": "O parametro `prompt` e obrigatorio."}), 400
+    
+    try:
+        response= gpt_answer(prompt)
+        return jsonify({"response": response}), 200
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+@app.route('/chat', methods=['POST'])
+@cross_origin()
+def chat_gpt():
+    data= request.get_json()
+
+    u_messages= data.get('user_messages', [])
+    s_messages= data.get('system_messages', [])
+    prompt= data.get('prompt')
+
+    if not prompt:
+        return jsonify({"erro": "O parametro `prompt` e obrigatorio."}), 400
+
+    try:    
+        response= chat_with_professor(prompt= prompt, user_messages= u_messages, system_messages= s_messages)
+        return jsonify({"response": response}), 200
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
 
 #Credenciais / Usuário
 #Cadastro
