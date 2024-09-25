@@ -6,6 +6,7 @@ import { AddPopupComponent } from '../add-popup/add-popup.component';
 import { AddTextPopupComponent } from '../add-text-popup/add-text-popup.component';
 import { AddMathOperationComponent } from '../add-math-operation/add-math-operation.component';
 import { AddListOperationComponent } from '../add-list-operation/add-list-operation.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class LabPageComponent {
   ];
   items: string[] = []; // "Código" do usuário
   vars: string[]= []; // Variáveis do usuário
+  codeId: number= -1;
+  codeDetails= {};
+  codeTitulo: string= "";
+  isLogged: boolean= false;
 
   selectedLang: string= "";
   question: string= "";
@@ -41,11 +46,28 @@ export class LabPageComponent {
     return drag.dropContainer.id !== 'userCode';
   }
 
-  constructor(private gptService: GeminiService, public dialog: MatDialog){}
+  constructor(
+    public route: ActivatedRoute,
+    public dialog: MatDialog,
+    private gptService: GeminiService
+  ){}
   
+  ngOnInit(){
+    this.route.queryParams.subscribe(params=>{
+
+      this.codeId= params['id'];
+      this.codeTitulo= params['titulo'] || '';
+      this.isLogged= !!sessionStorage.getItem('token');
+
+      if(this.codeId){
+        this.loadCode(this.codeId);
+      }
+    });
+  }
+
   //Libera o botão para perguntar apenas com conteúdo
   isFormValid(): boolean { 
-    return this.question.length > 10 && this.selectedLang !== '';
+    return this.items.length > 1 && this.selectedLang !== '';
   }
 
   //Evento de drop, biblioteca do Angular
@@ -91,20 +113,12 @@ export class LabPageComponent {
         let i6= this.items.indexOf("FIM-SE");
         this.items.splice(i6, 1);
         
-        this.question="";
-        this.items.forEach(e => {
-          this.question+= `${e} `;
-        });
         break;
       default:
         break;
     }
     this.items.splice(index, 1);
 
-    this.question="";
-    this.items.forEach(e => {
-      this.question+= `${e} `;
-    });
   }
 
   //Ao clicar duas vezes na variável, remove ela
@@ -266,6 +280,10 @@ export class LabPageComponent {
 
   //Post para enviar solicitação ao endpoint
   askGemini() {
+    this.question="";
+    this.items.forEach(e => {
+      this.question+= `${e} `;
+    });
     this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays" devem ser considerados como listas. "DECLARE" representa um input do usuário. ${ this.question }.`)
       .subscribe(rspns=> {
         let rawresponse = rspns.response;
@@ -275,5 +293,23 @@ export class LabPageComponent {
           this.answer= rawresponse;
         }
       });
+  }
+
+  //Procura pelo código caso já exista, e carrega os dados salvos nos devidos locais
+  loadCode(id: number){
+    this.gptService.getCodeDetails(id).subscribe(
+      (rspns)=>{
+        this.codeDetails= rspns;
+        this.loadData(this.codeDetails);
+      }
+    )
+  }//Carrega os detalhes nas respectivas listas
+  loadData(details: any){
+    this.items= details.code;
+    this.vars= details.variaveis;
+  }
+
+  saveCode(){
+    console.log('todo');
   }
 }

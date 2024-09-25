@@ -15,4 +15,5 @@
 <mat-dialog-actions align="end">
     <button mat-button (click)="onClose()">Cancelar</button>
     <button mat-button [disabled]="loading || !loginData.email || !loginData.pwd" (click)="onSubmit()">Entrar</button>
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>
 </mat-dialog-actions>

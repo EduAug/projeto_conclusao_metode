@@ -1,3 +1,8 @@
+<div *ngIf="isLogged" class="d-flex">
+  <input type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
+  <button class="btn" [disabled]="items.length === 0 || !codeTitulo" (click)="saveCode()">Salvar</button>
+</div>
+
 <form name="questionbox" (ngSubmit)="askGemini()">
     <div class="container">
       <div class="row">

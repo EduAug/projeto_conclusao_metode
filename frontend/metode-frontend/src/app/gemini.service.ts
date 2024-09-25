@@ -11,7 +11,7 @@ export class GeminiService {
   constructor(private https: HttpClient) { }
 
   askDQuestion(prompt: string){
-    return this.https.post<any>(`${API_URL}/ask` , {prompt});
+    return this.https.post<any>(`${API_URL}/ask` , { prompt });
   }
 
   chatMessage(userMessages: string[], systemMessages: string[], prompt: string){
@@ -29,12 +29,23 @@ export class GeminiService {
   }
 
   login(loginData: { email: string, pwd: string }){
-    //console.log("Token captado");
     return this.https.post<any>(`${API_URL}/login`, loginData);
   }
   getDName(){
     const token= sessionStorage.getItem('token');
     const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.https.get<any>(`${API_URL}/displayname`, { headers });
+  }
+
+  getCodes(){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.get<any>(`${API_URL}/allcodes`, { headers });
+  }
+
+  getCodeDetails(codeId: number){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.get<any>(`${API_URL}/code/${codeId}`, { headers });
   }
 }

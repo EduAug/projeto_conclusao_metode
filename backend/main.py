@@ -235,7 +235,7 @@ def get_all_from_user():
     if codes is not None:
         return jsonify(codes), 200
     else:
-        return jsonify({"erro": "Erro ao retornar codigos"}), 500
+        return jsonify({"erro": "Sem codigos encontrados"}), 500
 
 
 #Pegar o código específico completo

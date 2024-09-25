@@ -2,12 +2,18 @@
     border-color: red !important;
 }
 
-.mat-form-field-error mat-label{
-    color: red !important;
+.custom-spinner 
+::ng-deep .mat-progress-spinner circle,
+::ng-deep .mat-mdc-progress-spinner circle {
+  stroke: rgba(89, 145, 89, 0.349) !important;
 }
 
 .error-message{
     color: red;
     margin-top: 10px;
     padding: 20px;
+}
+
+.mat-form-field-error mat-label{
+    color: red !important;
 }
