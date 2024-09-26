@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NotificationPopupComponent } from './notification-popup/notification-popup.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginPopupComponent,
     SignupPopupComponent,
     ChatWindowComponent,
-    ManagePageComponent
+    ManagePageComponent,
+    NotificationPopupComponent
   ],
   imports: [
     BrowserModule,

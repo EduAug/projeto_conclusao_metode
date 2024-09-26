@@ -7,7 +7,7 @@
 
     <mat-form-field appearance="outline" class="w-100 password-field">
         <mat-label>Senha</mat-label>
-        <input matInput [(ngModel)]="loginData.pwd" type="password" placeholder="Senha" required>
+        <input matInput (keyup.enter)="onSubmit()" [(ngModel)]="loginData.pwd" type="password" placeholder="Senha" required>
     </mat-form-field>
 
     <p *ngIf="loginFailed" class="error-message text-center">Login Falhou. Confira seu email e senha <br>(Letras maísuculas inclusive).</p>

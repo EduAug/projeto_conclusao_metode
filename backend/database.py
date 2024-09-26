@@ -153,7 +153,7 @@ def create_code(user_id, title, varis= None, code= None):
         return code_id
     except Exception as e:
         conn.rollback()
-        print("Erro ao criar usuario: ", e)
+        print("Erro ao salvar codigo: ", e)
         return None
     finally:
         cursor.close()

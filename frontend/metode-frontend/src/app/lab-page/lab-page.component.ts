@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { GeminiService } from '../gemini.service';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +7,7 @@ import { AddTextPopupComponent } from '../add-text-popup/add-text-popup.componen
 import { AddMathOperationComponent } from '../add-math-operation/add-math-operation.component';
 import { AddListOperationComponent } from '../add-list-operation/add-list-operation.component';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationPopupComponent } from '../notification-popup/notification-popup.component';
 
 
 @Component({
@@ -30,11 +31,16 @@ export class LabPageComponent {
   codeId: number= -1;
   codeDetails= {};
   codeTitulo: string= "";
+
   isLogged: boolean= false;
+  firstSave: boolean= true;
+  loading: boolean= false;
 
   selectedLang: string= "";
   question: string= "";
   answer: string= "";
+
+  @ViewChild(NotificationPopupComponent) notif!: NotificationPopupComponent;
 
   canEnterCodeList= (drag: CdkDrag, drop: CdkDropList): boolean =>{
     //Permite que apenas os itens de Variáveis e Items ("Drag") sejam largados no código do usuário (Drop)
@@ -56,6 +62,7 @@ export class LabPageComponent {
     this.route.queryParams.subscribe(params=>{
 
       this.codeId= params['id'];
+      this.firstSave= !this.codeId;
       this.codeTitulo= params['titulo'] || '';
       this.isLogged= !!sessionStorage.getItem('token');
 
@@ -310,6 +317,39 @@ export class LabPageComponent {
   }
 
   saveCode(){
-    console.log('todo');
+    this.loading= true;
+    const payload= {
+      title: this.codeTitulo,
+      varis: this.vars,
+      code: this.items,
+    };
+
+    if(this.firstSave){
+      this.gptService.saveCode(payload).subscribe(
+        (rspns)=> {
+          this.loading= false;
+          this.firstSave= false;
+          this.codeId= rspns.id;
+          this.notif.showMessage("Código salvo com sucesso", "success");
+        },
+        (error)=> {
+          this.loading= false;
+          this.notif.showMessage("Erro ao salvar código", "error");
+        }
+      );
+    }else {
+      if(this.codeId){
+        this.gptService.updateCode(this.codeId, payload).subscribe(
+          (rspns)=> {
+            this.loading= false;
+            this.notif.showMessage("Código atualizado com sucesso", "success");
+          },
+          (error)=> {
+            this.loading= false;
+            this.notif.showMessage("Erro ao atualizar código", "error");
+          }
+        )
+      }
+    }
   }
 }

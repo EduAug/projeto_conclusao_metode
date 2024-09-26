@@ -24,7 +24,7 @@ export class GeminiService {
     return this.https.post<any>(`${API_URL}/chat`, payload);
   }
 
-  signup(signupData: { email: string, dname: string, pwd: string}){
+  signup(signupData: { email: string, dname: string, pwd: string }){
     return this.https.post<any>(`${API_URL}/signup`, signupData);
   }
 
@@ -47,5 +47,17 @@ export class GeminiService {
     const token= sessionStorage.getItem('token');
     const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.https.get<any>(`${API_URL}/code/${codeId}`, { headers });
+  }
+
+  saveCode(payload: { title: string, varis: string[], code: string[] }){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.post<any>(`${API_URL}/save`, payload, { headers });
+  }
+
+  updateCode(codeId: number, payload: { title: string, varis: string[], code: string[] }){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.put<any>(`${API_URL}/updcode/${codeId}`, payload, { headers });
   }
 }

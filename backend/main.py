@@ -211,7 +211,7 @@ def save_code():
 
     code_id= create_code(user_id, title, varis, code)
     if code_id:
-        return jsonify({"mensagem": "Codigo salvo com sucesso"}), 201
+        return jsonify({"mensagem": "Codigo salvo com sucesso", "id": code_id}), 201
     else:
         return jsonify({"erro": "Erro ao salvar codigo"}), 500
 

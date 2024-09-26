@@ -1,40 +1,94 @@
-.answer{
-    min-height: 20vh;
-    margin: 20px;
-  }
-  
-  .bi{
-    font-size: 15px;
-    margin: 0 5px 5px;
-    color: darkgray;
-  }
-  
-  .item, .vari, .functoper {
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    cursor: grab;
-  }
-  
-  .cdk-drag-preview {
-    background-color: #e0e0e0;
-  }
-  
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
-  .list-body {
-    border: solid 1px #ccc;
-    min-height: 60px;
-    max-height: 50vh;
-    background: white;
-    border-radius: 4px;
-    overflow: hidden;
-    display: block;
-  }
-  
-  h3 {
-    margin-top: 20px;
-    text-align: center;
-  }
+.answer {
+  min-height: 20vh;
+  margin: 20px;
+}
+
+.bi {
+  font-size: 15px;
+  margin: 0 5px 5px;
+  color: darkgray;
+}
+
+.btn-save {
+  height: 40px;
+  padding: 0 15px;
+  background-color: #aff1c3;
+  border: none;
+  color: black;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+.btn-save:disabled{
+  background-color: gray;
+}
+.btn-save:hover {
+  background-color: #44af4d;
+}
+
+.container-top {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin: 10px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.input-name {
+  height: 40px;
+  padding: 10px;
+  margin-right: 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.item, .vari, .functoper {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  cursor: grab;
+}
+
+.cdk-drag-preview {
+  background-color: #e0e0e0;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.list-body {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  max-height: 50vh;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.manage-navigate {
+  position: absolute;
+  right: 10px;
+  height: 40px;
+  background-color: #aff1c3;
+  border: none;
+  color: black;
+  padding: 0 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+.manage-navigate:hover {
+  background-color: #44af4d;
+}
+
+h3 {
+  margin-top: 20px;
+  text-align: center;
+}

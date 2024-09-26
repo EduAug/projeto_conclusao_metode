@@ -1,6 +1,14 @@
-<div *ngIf="isLogged" class="d-flex">
-  <input type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
-  <button class="btn" [disabled]="items.length === 0 || !codeTitulo" (click)="saveCode()">Salvar</button>
+<div *ngIf="isLogged" class="container-top">
+  <div class="input-container">
+    <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
+    <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
+      {{ loading ? 'Salvando...' : 'Salvar' }}
+    </button>
+  </div>
+
+    <app-notification-popup #notif></app-notification-popup>
+    
+    <button class="manage-navigate" routerLink="/manage">Retornar</button>
 </div>
 
 <form name="questionbox" (ngSubmit)="askGemini()">

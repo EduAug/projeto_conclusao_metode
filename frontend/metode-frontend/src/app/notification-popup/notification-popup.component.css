@@ -1,0 +1,21 @@
+.notification{
+    position: fixed;
+    top: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    color: black;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.5s;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.notification.success{
+    background-color: rgba(89, 145, 89, 0.349);
+    border: 2px solid darkgreen;
+}
+.notification.error{
+    background-color: rgba(145, 93, 89, 0.349);
+    border: 2px solid red;
+}
