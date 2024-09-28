@@ -36,6 +36,23 @@ export class GeminiService {
     const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.https.get<any>(`${API_URL}/displayname`, { headers });
   }
+  getUserData(){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.get<any>(`${API_URL}/userdata`, { headers });
+  }
+
+  updateAccount(userData: { email: string, dname: string, pwd: string }){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.put<any>(`${API_URL}/update`, userData, { headers });
+  }
+
+  deleteAccount(){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.delete<any>(`${API_URL}/delete`, { headers });
+  }
 
   getCodes(){
     const token= sessionStorage.getItem('token');
@@ -59,5 +76,11 @@ export class GeminiService {
     const token= sessionStorage.getItem('token');
     const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.https.put<any>(`${API_URL}/updcode/${codeId}`, payload, { headers });
+  }
+
+  deleteCode(codeId: number){
+    const token= sessionStorage.getItem('token');
+    const headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.https.delete<any>(`${API_URL}/deletecode/${codeId}`, { headers });
   }
 }

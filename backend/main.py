@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import cross_origin
 from apigpt import gpt_answer, chat_with_professor
-from database import create_user, verify_user, update_user, delete_user, create_code, get_all_codes, get_code_details, update_codigo, delete_codigo
+from database import create_user, verify_user, get_user_data, update_user, delete_user, create_code, get_all_codes, get_code_details, update_codigo, delete_codigo
 import config
 import jwt
 
@@ -64,6 +64,7 @@ def signup():
     else:
         return jsonify({"erro": "Falha ao criar usuário"}), 500
 
+
 #Pegar nome (Read?)
 @app.route('/displayname', methods=['GET'])
 @cross_origin()
@@ -86,6 +87,31 @@ def get_display_name():
     else:
         return jsonify({"erro": "Falha ao pegar nome do usuário"}), 500
 
+
+#Pegar dados (Read.)
+@app.route('/userdata', methods=['GET'])
+@cross_origin()
+def get_u_data():
+    auth_header= request.headers.get('Authorization')
+
+    if not auth_header:
+        return jsonify({"erro": "Autorização faltante"}), 401
+    token= auth_header.split(" ")[1]
+
+    decoded= decode_token(token)
+
+    if "erro" in decoded:
+        return jsonify(decoded), 401
+    
+    user_id= decoded['id']
+
+    user_data= get_user_data(user_id)
+
+    if user_data:
+        return jsonify({"email": user_data['email'], "dname": user_data['nomeexibicao']}), 200
+    else:
+        return jsonify({"erro": "Usuario nao encontrado"})
+    
 
 #Atualizar
 @app.route('/update', methods=['PUT'])

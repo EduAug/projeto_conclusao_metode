@@ -1,3 +1,7 @@
+.button-group{
+    margin-top: auto;
+}
+
 .code-square{
     background-color: #aff1c3;
     border-radius: 10px;
@@ -21,4 +25,12 @@
 
 .code-square:hover button{
     display: inline-block;
+}
+
+.col-md-3{
+    height: 50vh;
+}
+
+button:disabled{
+    background-color: grey;
 }

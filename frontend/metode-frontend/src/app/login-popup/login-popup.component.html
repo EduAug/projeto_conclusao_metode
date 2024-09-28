@@ -1,4 +1,6 @@
-<h2>Login</h2>
+<h2 *ngIf="!isDeletion">Login</h2>
+<h2 *ngIf="isDeletion">Confirme suas credenciais</h2>
+
 <div>
     <mat-form-field appearance="outline" class="w-100 email-field">
         <mat-label>Email</mat-label>
@@ -10,10 +12,11 @@
         <input matInput (keyup.enter)="onSubmit()" [(ngModel)]="loginData.pwd" type="password" placeholder="Senha" required>
     </mat-form-field>
 
-    <p *ngIf="loginFailed" class="error-message text-center">Login Falhou. Confira seu email e senha <br>(Letras maísuculas inclusive).</p>
+    <p *ngIf="loginFailed && !isDeletion" class="error-message text-center">Login Falhou. Confira seu email e senha <br>(Letras maísuculas inclusive).</p>
+    <p *ngIf="loginFailed && isDeletion" class="error-message text-center">Suas credenciais estão incorretas.</p>
 </div>
 <mat-dialog-actions align="end">
     <button mat-button (click)="onClose()">Cancelar</button>
-    <button mat-button [disabled]="loading || !loginData.email || !loginData.pwd" (click)="onSubmit()">Entrar</button>
+    <button mat-button [disabled]="loading || !loginData.email || !loginData.pwd" (click)="onSubmit()">Login</button>
     <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>
 </mat-dialog-actions>

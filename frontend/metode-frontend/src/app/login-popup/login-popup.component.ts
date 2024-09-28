@@ -1,5 +1,5 @@
-import { Component, Renderer2 } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, Input, Renderer2 } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GeminiService } from '../gemini.service';
 
@@ -9,6 +9,8 @@ import { GeminiService } from '../gemini.service';
   styleUrl: './login-popup.component.css'
 })
 export class LoginPopupComponent {
+  @Input() isDeletion: boolean= false;
+
   loginData= {
     email:'',
     pwd:''
@@ -20,8 +22,11 @@ export class LoginPopupComponent {
     public dialogRef: MatDialogRef<LoginPopupComponent>,
     public render: Renderer2,
     public router: Router,
-    private apiService: GeminiService
-  ){}
+    private apiService: GeminiService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ){
+    if(data) this.isDeletion= data.isDeletion;
+  }
 
   onClose(): void{
     this.dialogRef.close();
@@ -32,10 +37,15 @@ export class LoginPopupComponent {
     this.apiService.login(this.loginData).subscribe(
       (rspns)=> {
         sessionStorage.setItem('token', rspns.token);
-        this.dialogRef.close();
-        this.router.navigate(['/manage']);
+
+        if(this.isDeletion){
+          this.dialogRef.close({ success: true });
+        }else{
+          this.dialogRef.close();
+          this.router.navigate(['/manage']);
+        }
       },
-      error=> {
+      (error)=> {
         this.loading= false;
         this.loginFailed= true;
         let emailField= document.querySelector('.email-field');

@@ -31,6 +31,25 @@ def create_user(email, dname, pwd):
     return user_id
 
 
+def get_user_data(user_id):
+    conn= psycopg2.connect(config.connection_string)
+    cursor= conn.cursor()
+
+    query="SELECT Email, NomeExibicao FROM Usuario WHERE Id = %s;"
+
+    try:
+        cursor.execute(query, (user_id,))
+        u_data= cursor.fetchone()
+        
+        return {"email": u_data[0], "nomeexibicao": u_data[1]}
+    except Exception as e:
+        print("Erro ao captar dados do usuario", e)
+        return None
+    finally:
+        cursor.close()
+        conn.close()
+
+
 #Adicionando "None" aos parâmetros, para que possa ser atualizado apenas
 #o que o usuário deseja, sem precisar de todos para ser alterado
 def update_user(user_id, email= None, dname= None, pwd= None):

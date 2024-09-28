@@ -15,6 +15,7 @@ export class SignupPopupComponent {
     pwd:''
   };
   loading: boolean= false;
+  isPasswordVisible: boolean= false;
 
   constructor(
     public route: Router,
@@ -49,5 +50,15 @@ export class SignupPopupComponent {
         console.error("Failed signup");
       }
     });
+  }
+
+  isValid(password: string): boolean{
+    const minLength= password.length >= 6;
+    const hasUpper= /[A-Z]/.test(password);
+    const hasLower= /[a-z]/.test(password)
+    const hasNumber= /\d/.test(password);
+    const hasSpecial= /[!@#$%¨&*]/.test(password);
+
+    return minLength && hasUpper && hasLower && hasNumber && hasSpecial;
   }
 }

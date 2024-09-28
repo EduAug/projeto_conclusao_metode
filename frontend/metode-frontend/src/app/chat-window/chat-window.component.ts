@@ -61,13 +61,11 @@ export class ChatWindowComponent implements AfterViewChecked {
   }
 
   private scrollToBottom(): void{
-    console.log("Starting scroll")
     if(this.chatMessagesContainer){
-      console.log("found chatMessagesContainer");
       try{
         this.chatMessagesContainer.nativeElement.scrollTop= this.chatMessagesContainer.nativeElement.scrollHeight;
       }catch (err){
-        console.log('Chat fechado, ', err);
+        console.error('Chat fechado, ', err);
       }
     }
   }
