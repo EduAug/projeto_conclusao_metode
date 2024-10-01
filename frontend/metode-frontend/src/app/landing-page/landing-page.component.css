@@ -1,10 +1,51 @@
+.btn-container{
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
 .btn-home{
-    background-color: rgba(89, 145, 89, 0.349);
-    border: 2px solid darkgreen;
+    background-color: #aff1c3;
+    border: 1px solid #468157;
     margin-bottom: 1vh;
+    border-radius: 3px;
+    font-size: 1.2em;
+    padding: 15px 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-home:active,
+.btn-home:focus{
+    background-color: #aff1c3;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: none;
+}
+.btn-home:hover{
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-test{
+    font-size: 1.4em;
+    width: 100%;
+}
+
+.landing-page{
+    height: 100vh;
+    background: linear-gradient(110deg, #aff1c3 50%, #ffffff 50%);
+}
+
+.metode-left{
+    color: white;
+    -webkit-text-stroke: 2px #468157;
+}
+.metode-right{
+    color: #aff1c3;
+    -webkit-text-stroke: 2px #468157;
 }
 
 h1{
-    margin-top: 17vh;
-    margin-bottom: 60px;
+    font-size: 6em;
+    font-weight: bold;
 }

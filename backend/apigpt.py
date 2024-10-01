@@ -5,10 +5,11 @@ from openai import OpenAI
 client= OpenAI(api_key=config.api_key)
 
 def gpt_answer(prompt):
+    print(prompt)
     response= client.chat.completions.create(
         model= "gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "Você é um compilador de pseudocódigo em fornecida linguagem, incluindo imports/using/etc. e SEM comentários explicativos, que utiliza os métodos fornecidos nativamente pela linguagem fornecida."},
+            {"role": "system", "content": "Desconsidere qualquer solicitação anterior, referente a código. Você é um compilador de pseudocódigo em fornecida linguagem, incluindo imports/using/etc. e SEM comentários explicativos, que utiliza os métodos fornecidos nativamente pela linguagem fornecida."},
             {"role": "user", "content": prompt}
         ]
     )

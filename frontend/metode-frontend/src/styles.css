@@ -2,3 +2,48 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-mdc-dialog-container
+.mdc-dialog__container
+.mat-mdc-dialog-surface:has(.signup-container) {
+  background-color: #aff1c3;
+}/*
+mat-dialog-actions .mat-mdc-button-ripple:not(.mat-icon){
+    color: #aff1c3;
+    background-color: white;
+}*/
+mat-dialog-actions .btn-cancel> .mdc-button__label{
+    color: #19af20;
+}
+mat-dialog-actions .btn-cancel>.mat-mdc-button-ripple{
+    background-color: white;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+  .mdc-notched-outline__trailing {
+  border-color: #19af20 !important;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: white !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: white !important;
+}
+
+/* mat-dialog-actions .btn-submit> .mdc-button__label:not(disabled){
+    color: white;
+}
+mat-dialog-actions .btn-submit> .mat-mdc-button-ripple:not(disabled){
+    background-color: #19af20;
+}
+mat-dialog-actions .btn-submit> .mdc-button__label{
+    color: red;
+}
+mat-dialog-actions .btn-submit> .mat-mdc-button-ripple{
+    background-color: rgb(255, 255, 255);
+} */

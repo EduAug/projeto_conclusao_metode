@@ -1,29 +1,29 @@
-<h2>Cadastrar</h2>
-<div>
-    <mat-form-field appearance="outline" class="w-100">
+<h2 class="title">Cadastrar</h2>
+<div class="signup-container container-fluid">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="signupData.email" placeholder="Email" required>
+        <input matInput type="email" [(ngModel)]="signupData.email" placeholder="Email" required>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nome de exibição</mat-label>
         <input matInput [(ngModel)]="signupData.dname" placeholder="Nome de exibição" required>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Senha</mat-label>
         <input 
             matInput 
-            matTooltip="Sua senha precisa conter uma letra minúscula, uma letra maíscula, um número, um caractere especial e no mínimo 6 digitos."
-            matTooltipPosition="left"
             [(ngModel)]="signupData.pwd" 
             [type]="toggle.type"
             placeholder="Senha" 
             required>
         <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
     </mat-form-field>
-    
+
+    <!-- Password strength meter -->
     <mat-password-strength
+        class="password-meter"
         [password]="signupData.pwd"
         [min]="6"
         [enableUpperCaseLetterRule]="true"
@@ -32,23 +32,21 @@
         [enableSpecialCharRule]="true"
         [warnThreshold]="21"
         [accentThreshold]="51"
-        class="green"
         #pwdComp
     ></mat-password-strength>
-    <!-- <mat-password-strength-info
-        [passwordComponent]="pwdComp"
-        [lowerCaseCriteriaMsg]="'Pr'"
-        [upperCaseCriteriaMsg]="'Precisa conter '"
-        [digitsCriteriaMsg]="'Precisa conter '"
-        [specialCharsCriteriaMsg]="'Precisa conter '"
-        [minCharsCriteriaMsg]="'No mínimo 6 dígitos'"
-    ></mat-password-strength-info> -->
+
+    <div class="password-criterias">
+    <b>Sua senha deve conter:</b>
+    <p>• Uma letra minúscula • Uma letra maiúscula</p>
+        <p>• Um número • Um caractere especial</p>
+        <p>• E no mínimo 6 dígitos</p>
+    </div>
 </div>
 
-<mat-dialog-actions align="end">
-    <button mat-button (click)="onClose()">Cancelar</button>
-    <button
-        mat-button 
+<!-- Dialog Actions -->
+<mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-button class="btn-cancel" (click)="onClose()">Cancelar</button>
+    <button mat-button class="btn-submit" 
         [disabled]="loading || !signupData.email || !signupData.pwd || !signupData.dname || !isValid(signupData.pwd)" 
         (click)="onSubmit()">Cadastrar</button>
     <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>

@@ -1,3 +1,60 @@
+.signup-container {
+  background-color: #aff1c3;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: white;
+  -webkit-text-stroke: 1px #19af20;
+  text-align: center;
+  font-size: 2.7em;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.form-field {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.password-meter {
+  margin: 15px auto;
+  width: 70%;
+}
+
+.password-criterias {
+  margin-top: 15px;
+}
+.password-criterias p{
+  margin: 0 auto;
+}.password-criterias b{
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.btn-cancel {
+  background-color: white;
+}
+
+.btn-submit:not(:disabled) {
+  background-color: #19af20;
+  color: white;
+}
+
+.btn-submit:disabled {
+  color: white;
+  border: 1px solid white;
+}
+
 .custom-spinner 
 ::ng-deep .mat-progress-spinner circle,
 ::ng-deep .mat-mdc-progress-spinner circle {

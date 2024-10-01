@@ -291,7 +291,7 @@ export class LabPageComponent {
     this.items.forEach(e => {
       this.question+= `${e} `;
     });
-    this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays" devem ser considerados como listas. "DECLARE" representa um input do usuário. ${ this.question }.`)
+    this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays", caso existam no pseudocódigo requisitado, devem ser considerados como listas. "DECLARE", novamente apenas caso constado, representa um input do usuário. ${ this.question }.`)
       .subscribe(rspns=> {
         let rawresponse = rspns.response;
         if(rawresponse.startsWith('```') && rawresponse.endsWith('```')){

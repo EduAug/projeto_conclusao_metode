@@ -53,11 +53,17 @@ export class SignupPopupComponent {
   }
 
   isValid(password: string): boolean{
+    //console.log("Origin: ",password);
     const minLength= password.length >= 6;
+    //console.log("Minimo 6?",minLength);
     const hasUpper= /[A-Z]/.test(password);
+    //console.log("Tem maiuscula?",hasUpper);
     const hasLower= /[a-z]/.test(password)
+    //console.log("Tem minuscula?",hasLower);
     const hasNumber= /\d/.test(password);
+    //console.log("Tem numero?",hasNumber);
     const hasSpecial= /[!@#$%¨&*]/.test(password);
+    //console.log("Tem especial?",hasSpecial);
 
     return minLength && hasUpper && hasLower && hasNumber && hasSpecial;
   }

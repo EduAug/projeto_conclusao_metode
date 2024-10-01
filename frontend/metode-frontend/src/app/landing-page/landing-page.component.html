@@ -1,16 +1,15 @@
-<div class="landing-page container-fluid">
-    <div class="row text-center">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 row">
-            <h1>Landing.</h1>
-            <div class="col-md-2"></div>
-            <div class="col-md-8 btn-group-vertical">
-                <button class="btn btn-home" (click)="openSignupDialog()">Criar conta</button>
-                <button class="btn btn-home" (click)="openLoginDialog()">Efetuar login</button>
-                <button class="btn btn-home" routerLink="/lab">Só quero testar algo</button>
-            </div>            
-            <div class="col-md-2"></div>
+<div class="landing-page container-fluid d-flex align-items-center justify-content-center">
+    <div class="text-center content">
+        <h1>
+            <span class="metode-left">MET</span><span class="metode-right">ODE</span>
+        </h1>
+        <p>Um novo método para aprender código</p>
+        <div class="btn-container">
+            <div class="row justify-content-center">
+                <button class="btn btn-home col-md-5 mx-2" (click)="openSignupDialog()">Criar conta</button>
+                <button class="btn btn-home col-md-5 mx-2" (click)="openLoginDialog()">Efetuar login</button>
+            </div>
+            <button class="btn btn-home btn-test mt-4" routerLink="/lab">Apenas quero testar algo</button>
         </div>
-        <div class="col-md-4"></div>
     </div>
 </div>
