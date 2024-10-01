@@ -1,11 +1,17 @@
-<h2 class="text-center">Texto livre</h2>
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Texto</mat-label>
+<div class="container-fluid text-center string-container">
+  <h2 class="text-center">Texto livre</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Insira qualquer texto aqui!</mat-label>
         <input matInput [(ngModel)]="newItem">
-    </mat-form-field>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
-<div>
-    <button mat-button (click)="closeDialog()">Cancelar</button>
-    <button mat-button (click)="addItem()">Adicionar</button>
-</div>
+
+<mat-dialog-actions class="dialog-actions">
+    <button mat-button class="btn-cancel" (click)="closeDialog()">Cancelar</button>
+    <button mat-button class="btn-submit" [disabled]="!newItem" (click)="addItem()">Adicionar</button>
+  </mat-dialog-actions>

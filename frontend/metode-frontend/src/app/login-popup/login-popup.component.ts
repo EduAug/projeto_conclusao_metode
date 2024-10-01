@@ -1,7 +1,8 @@
-import { Component, Inject, Input, Renderer2 } from '@angular/core';
+import { Component, Inject, Input, Renderer2, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GeminiService } from '../gemini.service';
+import { NotificationPopupComponent } from '../notification-popup/notification-popup.component';
 
 @Component({
   selector: 'app-login-popup',
@@ -17,6 +18,8 @@ export class LoginPopupComponent {
   };
   loading: boolean= false;
   loginFailed: boolean= false;
+
+  @ViewChild(NotificationPopupComponent) notif!: NotificationPopupComponent;
 
   constructor(
     public dialogRef: MatDialogRef<LoginPopupComponent>,
@@ -49,13 +52,17 @@ export class LoginPopupComponent {
         this.loading= false;
         this.loginFailed= true;
         let emailField= document.querySelector('.email-field');
+        console.log(emailField);
         let pwdField= document.querySelector('.password-field');
-
-        this.render.addClass(emailField, 'mat-form-field-error');
-        this.render.addClass(pwdField, 'mat-form-field-error');
+        console.log(pwdField);
+        
+        const errorMessage= this.isDeletion 
+          ? "Credenciais incorretas."
+          : "Login Falhou. Confira seus dados (Letras maiúsculas inclusive)."
+        
+        this.notif.showMessage(errorMessage, "error");
+        
         setTimeout(()=>{
-          this.render.removeClass(emailField, 'mat-form-field-error');
-          this.render.removeClass(pwdField, 'mat-form-field-error');
           this.loginFailed= false;
         }, 5000);
       }

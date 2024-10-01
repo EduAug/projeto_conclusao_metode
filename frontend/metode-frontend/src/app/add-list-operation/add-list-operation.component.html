@@ -1,45 +1,57 @@
 <h2 class="text-center">{{ (operation === 'ADD') ? "ADICIONAR A LISTA" : (operation === 'REMOVE') ? "REMOVER DA LISTA" : "ITERAÇÃO" }}</h2>
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 d-flex flex-column align-items-center">
-        <ng-container *ngIf="operation !== 'LOOP'; else regularOperation">
-            <mat-form-field appearance="fill" class="w-300">
-                <mat-label>{{ operation === 'FOREACH' ? 'List to iterate' : 'List to modify' }}</mat-label>
-                <mat-select [(ngModel)]="targetVar" (selectionChange)="onTargetVarChange()">
-                    <mat-option *ngFor="let vari of availableVars" [value]="vari">{{ vari }}</mat-option>
-                </mat-select>
+<div class="container dialog-container">
+  <div class="row justify-content-center">
+    <div class="col-md-12 d-flex align-items-start justify-content-center">
+      
+      <ng-container *ngIf="operation !== 'LOOP'; else regularOperation">
+        <div class="row w-100">
+          <div class="col-md-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ operation === 'FOREACH' ? 'Lista para iterar' : 'Lista para modificar' }}</mat-label>
+              <mat-select [(ngModel)]="targetVar" (selectionChange)="onTargetVarChange()">
+                <mat-option *ngFor="let vari of availableVars" [value]="vari">{{ vari }}</mat-option>
+              </mat-select>
             </mat-form-field>
+          </div>
 
+          <div class="col-md-2"></div>
+
+          <div class="col-md-5">
             <ng-container *ngIf="operation !== 'FOREACH'; else forEachTemplate">
-                <mat-form-field appearance="fill" class="w-300">
-                    <mat-label>Custom value</mat-label>
-                    <input matInput [(ngModel)]="customVal" [disabled]="selectedVar !== ''">
-                </mat-form-field>
-                
-                <mat-form-field appearance="fill" class="w-300">
-                    <mat-label>Or variable</mat-label>
-                    <mat-select [(ngModel)]="selectedVar" [disabled]="customVal !== ''">
-                        <mat-option *ngFor="let vari of matchingVars" [value]="vari">{{ vari }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </ng-container>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Valor customizado</mat-label>
+                <input matInput [(ngModel)]="customVal" type="internalType === 'integer[]' || internalType === 'float[]' ? 'number' : 'text'" [disabled]="selectedVar !== ''">
+              </mat-form-field>
 
-            <ng-template #forEachTemplate class="text-center">
-            <h2 *ngIf="targetVar">FOR EACH "item" IN {{ targetVar }}</h2>
-            </ng-template>
-        </ng-container>
-  
-        <ng-template #regularOperation>
-          <mat-form-field appearance="fill" class="w-300">
-            <mat-label>Enter number of repetitions</mat-label>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Ou variável</mat-label>
+                <mat-select [(ngModel)]="selectedVar" [disabled]="customVal !== ''">
+                  <mat-option *ngFor="let vari of matchingVars" [value]="vari">{{ vari }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </div>
+
+          <ng-template #forEachTemplate>
+            <h4 *ngIf="targetVar">Para cada "item" em {{ targetVar }}</h4>
+          </ng-template>
+        </div>
+      </ng-container>
+
+      <ng-template #regularOperation>
+        <div class="w-50">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Insira o número de repetições</mat-label>
             <input matInput type="number" [(ngModel)]="loops" min="1">
           </mat-form-field>
-        </ng-template>
-      </div>
+        </div>
+      </ng-template>
+
     </div>
   </div>
-
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Cancelar</button>
-  <button mat-button (click)="addOperation()" [disabled]="!isInputValid()">Adicionar</button>
 </div>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button class="btn-cancel" (click)="closeDialog()">Cancelar</button>
+  <button mat-button class="btn-submit" (click)="addOperation()" [disabled]="!isInputValid()">Adicionar</button>
+</mat-dialog-actions>

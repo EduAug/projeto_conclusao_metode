@@ -1,27 +1,38 @@
-<h2 class="text-center">Variável</h2>
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="newItemName">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Tipo</mat-label>
-        <mat-select [(ngModel)]="newItemType" (selectionChange)="onTypeChange()">
-            <mat-option *ngFor="let type of variableTypes" [value]="type">{{ type }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <div *ngIf="isAList">    
-        <mat-form-field appearance="fill">
-            <mat-label>Tipo da lista</mat-label>
-            <mat-select [(ngModel)]="listItemType">
-                <mat-option *ngFor="let listType of listVariableTypes" [value]="listType">{{ listType }}</mat-option>
-            </mat-select>
+<div class="container-fluid text-center variable-container">
+    <h2 class="text-center">Variável</h2>
+  
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Nome</mat-label>
+          <input matInput [(ngModel)]="newItemName">
         </mat-form-field>
+      </div>
+  
+      <div class="col-md-5">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo</mat-label>
+          <mat-select [(ngModel)]="newItemType" (selectionChange)="onTypeChange()">
+            <mat-option *ngFor="let type of variableTypes" [value]="type">{{ type }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">Cancelar</button>
-    <button [disabled]="!isValid()" mat-button (click)="addItem()">Adicionar</button>
-</div>
+  
+    <div class="row justify-content-center" *ngIf="isAList">
+      <div class="col-md-5">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo da lista</mat-label>
+          <mat-select [(ngModel)]="listItemType">
+            <mat-option *ngFor="let listType of listVariableTypes" [value]="listType">{{ listType }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+  </div>
+<mat-dialog-actions class="dialog-actions">
+<button mat-button class="btn-cancel" (click)="closeDialog()">Cancelar</button>
+<button mat-button class="btn-submit" [disabled]="!isValid()" (click)="addItem()">Adicionar</button>
+</mat-dialog-actions>
+  

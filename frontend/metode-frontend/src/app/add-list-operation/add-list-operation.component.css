@@ -1,0 +1,36 @@
+.dialog-container {
+    padding: 20px;
+    min-width: 500px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.mat-form-field {
+    margin-bottom: 16px;
+}
+
+.btn-cancel {
+    background-color: white;
+}
+  
+.btn-submit:not(:disabled) {
+    background-color: #19af20;
+    border-color: #19af20;
+    color: white;
+}
+
+.btn-submit:disabled {
+  color: white;
+  border: 1px solid white;
+}
+
+h2{
+    color: white;
+    -webkit-text-stroke: 1px #19af20;
+    text-align: center;
+    font-size: 2.7em;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}

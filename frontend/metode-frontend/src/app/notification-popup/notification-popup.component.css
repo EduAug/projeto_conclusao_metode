@@ -17,6 +17,7 @@
     color: #287e42;
 }
 .notification.error{
-    background-color: rgba(145, 93, 89, 0.349);
+    background-color: rgb(148, 33, 42);
     border: 2px solid red;
+    color: white;
 }

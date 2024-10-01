@@ -4,9 +4,17 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-dialog-container
 .mdc-dialog__container
-.mat-mdc-dialog-surface:has(.signup-container) {
+.mat-mdc-dialog-surface:has(.signup-container, .dialog-container) {
   background-color: #aff1c3;
-}/*
+  border: 3px white solid;
+}
+.mat-mdc-dialog-container
+.mdc-dialog__container
+.mat-mdc-dialog-surface:has(.variable-container, .login-container, .string-container) {
+  background-color: white;
+  border: 3px #aff1c3 solid;
+}
+/*
 mat-dialog-actions .mat-mdc-button-ripple:not(.mat-icon){
     color: #aff1c3;
     background-color: white;
@@ -27,13 +35,18 @@ mat-dialog-actions .btn-cancel>.mat-mdc-button-ripple{
   border-color: #19af20 !important;
 }
 
+.mdc-floating-label{
+  color: #124214 !important;
+}
+
 .mat-mdc-text-field-wrapper {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 .mat-mdc-form-field-focus-overlay {
   background-color: white !important;
 }
+
 
 /* mat-dialog-actions .btn-submit> .mdc-button__label:not(disabled){
     color: white;

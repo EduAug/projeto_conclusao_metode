@@ -21,9 +21,8 @@
         <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
     </mat-form-field>
 
-    <!-- Password strength meter -->
     <mat-password-strength
-        class="password-meter"
+        class="password-meter green"
         [password]="signupData.pwd"
         [min]="6"
         [enableUpperCaseLetterRule]="true"
@@ -43,7 +42,6 @@
     </div>
 </div>
 
-<!-- Dialog Actions -->
 <mat-dialog-actions align="end" class="dialog-actions">
     <button mat-button class="btn-cancel" (click)="onClose()">Cancelar</button>
     <button mat-button class="btn-submit" 

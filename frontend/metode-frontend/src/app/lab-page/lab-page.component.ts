@@ -69,6 +69,9 @@ export class LabPageComponent {
       if(this.codeId){
         this.loadCode(this.codeId);
       }
+
+      this.items.push("MOSTRE");
+      this.items.push("`Olá, mundo!`");
     });
   }
 
