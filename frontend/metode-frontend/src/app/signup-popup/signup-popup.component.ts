@@ -52,6 +52,11 @@ export class SignupPopupComponent {
     });
   }
 
+  isNameValid(name: string): boolean{
+    //console.log(/\s/g.test(name));
+    return !/\s/g.test(name);
+  }
+  
   isValid(password: string): boolean{
     //console.log("Origin: ",password);
     const minLength= password.length >= 6;

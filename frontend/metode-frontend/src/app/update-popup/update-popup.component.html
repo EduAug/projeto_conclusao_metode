@@ -1,22 +1,37 @@
-<h2>Atualizar dados de usuário</h2>
-<div>
-    <mat-form-field appearance="outline" class="w-100">
+<h2>Atualizar dados</h2>
+<div class="update-container container-fluid">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nome de Exibição</mat-label>
         <input matInput [(ngModel)]="userData.dname" placeholder="Nome de exibição" required>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
         <input matInput [(ngModel)]="userData.email" placeholder="Email" required>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
+    <mat-form-field appearance="outline" class="form-field">
         <mat-label>Senha Nova</mat-label>
-        <input matInput [(ngModel)]="userData.pwd" type="password" placeholder="Sua nova senha" required>
+        <input
+            [type]="toggle.type"
+            matInput 
+            [(ngModel)]="userData.pwd" 
+            type="password" 
+            placeholder="Sua nova senha" 
+            required>
+        <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
     </mat-form-field>
 </div>
-<mat-dialog-actions align="end">
-    <button mat-button (click)="onClose()">Cancelar</button>
-    <button mat-button [disabled]="loading || !userData.dname || !userData.email || !userData.pwd" (click)="onUpdate()">Atualizar</button>
+<mat-dialog-actions align="center" class="dialog-actions">
+    <button mat-button class="btn-cancel" (click)="onClose()">Cancelar</button>
+    <button mat-button class="btn-submit" 
+    [disabled]="
+    loading || 
+    !isNameValid(userData.dname) ||
+    !userData.dname || 
+    !userData.email || 
+    !userData.pwd || 
+    !isValid(userData.pwd)" 
+    (click)="onUpdate()">Atualizar</button>
     <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>
 </mat-dialog-actions>

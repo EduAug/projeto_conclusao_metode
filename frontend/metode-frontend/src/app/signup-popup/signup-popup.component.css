@@ -47,6 +47,7 @@
 
 .btn-submit:not(:disabled) {
   background-color: #19af20;
+  border: 1px solid #19af20;
   color: white;
 }
 

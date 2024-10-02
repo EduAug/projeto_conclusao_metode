@@ -20,7 +20,8 @@
 }
 
 .code-square:hover{
-    background-color: #19af20;
+    background-color: #70d68f;
+    transform: scale(1.05);
 }
 
 .code-square:hover button{

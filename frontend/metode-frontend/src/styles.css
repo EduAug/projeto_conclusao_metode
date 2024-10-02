@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-mdc-dialog-container
 .mdc-dialog__container
-.mat-mdc-dialog-surface:has(.variable-container, .login-container, .string-container) {
+.mat-mdc-dialog-surface:has(.variable-container, .login-container, .string-container, .update-container) {
   background-color: white;
   border: 3px #aff1c3 solid;
 }
@@ -24,6 +24,10 @@ mat-dialog-actions .btn-cancel> .mdc-button__label{
 }
 mat-dialog-actions .btn-cancel>.mat-mdc-button-ripple{
     background-color: white;
+}
+
+.col-md-6 .btn-add-lab>.mdc-button__label{
+  color: #19af20;
 }
 
 .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused

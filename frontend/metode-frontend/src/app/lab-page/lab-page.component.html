@@ -1,101 +1,88 @@
-<div *ngIf="isLogged" class="container-top">
-  <div class="input-container">
-    <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
-    <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
-      {{ loading ? 'Salvando...' : 'Salvar' }}
-    </button>
-  </div>
+<div class="header-gradient">
+  <div *ngIf="isLogged" class="container-top">
+    <div class="input-container">
+      <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
+      <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
+        {{ loading ? 'Salvando...' : 'Salvar' }}
+      </button>
+    </div>
 
     <app-notification-popup #notif></app-notification-popup>
-    
+
     <button class="manage-navigate" routerLink="/manage">Retornar</button>
+  </div>
 </div>
 
-<form name="questionbox" (ngSubmit)="askGemini()">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>Operações e Funções Padrão
-            <i 
+<form name="questionbox" (ngSubmit)="askGpt()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Operações e Funções Padrão
+          <i 
             class="bi bi-question-circle" 
             matTooltip="Aqui estão as operações padrão. Tanto matemáticas, quanto lógicas, caso não encontre variáveis em alguma operação, provavelmente aquele tipo não seja suportado. Clique para adicionar ao código, ou abrir uma janela de criação, com base na operação."
             ></i>
-          </h3>
-          <div
-          cdkDropList
-          #thirdList="cdkDropList"
-          [cdkDropListData]="operations"
-          class="list-body overflow-auto"
-          [cdkDropListEnterPredicate]="canEnterVariableOperationList">
-            <div (click)="addFunctionToCode(operacao)" class="functoper" *ngFor="let operacao of operations" cdkDragDisabled="true">{{ operacao }}</div>
-          </div>
+        </h3>
+        <div cdkDropList #thirdList="cdkDropList" [cdkDropListData]="operations" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
+          <div (click)="addFunctionToCode(operacao)" class="functoper" *ngFor="let operacao of operations" cdkDragDisabled="true">{{ operacao }}</div>
         </div>
+      </div>
 
-        <div class="col-md-4">
-          <h3>Código
-            <i 
+      <div class="col-md-4">
+        <h3>Código
+          <i 
             class="bi bi-question-circle" 
             matTooltip="Aqui será uma representação do seu código. É possível arrastar os itens para organizar como desejas. Clique em um item para removê-lo."
             ></i>
-          </h3>
-            <div 
-            id="userCode"
-            cdkDropList 
-            #itemList="cdkDropList"
-            [cdkDropListData]="items" 
-            [cdkDropListConnectedTo]="[secondList, thirdList]"
-            (cdkDropListDropped)="drop($event)" 
-            class="list-body overflow-auto"
-            [cdkDropListEnterPredicate]="canEnterCodeList">
-              <div (click)="removeItem(i)" class="item" *ngFor="let item of items; let i= index" cdkDrag>{{ item }}</div>
-            </div>
+        </h3>
+        <div id="userCode" cdkDropList #itemList="cdkDropList" [cdkDropListData]="items" [cdkDropListConnectedTo]="[secondList, thirdList]" (cdkDropListDropped)="drop($event)" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterCodeList">
+          <div (click)="removeItem(i)" class="item" *ngFor="let item of items; let i= index" cdkDrag>{{ item }}</div>
         </div>
-        
-        <div class="col-md-4">
-          <h3>Variáveis
-            <i 
+      </div>
+
+      <div class="col-md-4">
+        <h3>Variáveis
+          <i 
             class="bi bi-question-circle" 
             matTooltip="Aqui estão suas variáveis. Representam valores que serão utilizados para compor o código. Arraste uma variável e largue sobre o código onde desejar. Clique duplo em um item para removê-lo das variáveis e do código."
             ></i>
-          </h3>
-          <div 
-          id="variables"
-          cdkDropList 
-          #secondList="cdkDropList" 
-          [cdkDropListData]="vars"  
-          [cdkDropListConnectedTo]="[itemList]"
-          (cdkDropListDropped)="drop($event)"
-          class="list-body overflow-auto"
-          [cdkDropListEnterPredicate]="canEnterVariableOperationList">
-            <div (dblclick)="removeVar(vari)" class="vari" *ngFor="let vari of vars" cdkDrag>{{ vari }}</div>
+        </h3>
+        <div id="variables" cdkDropList #secondList="cdkDropList" [cdkDropListData]="vars" [cdkDropListConnectedTo]="[itemList]" (cdkDropListDropped)="drop($event)" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
+          <div (dblclick)="removeVar(vari)" class="vari" *ngFor="let vari of vars" cdkDrag>{{ vari }}</div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-6">
+            <button
+            class="btn-add-lab"
+            matTooltip="Abre a janela de criação de variáveis, permitindo atribuição de um nome e tipo."
+            mat-button
+            type="button" 
+            (click)="openAddDialog()">Adicionar Variável</button>
           </div>
-          
-          <div class="row text-center">
-            <div class="col-md-6">
-              <button
-              matTooltip="Abre a janela de criação de variáveis, permitindo atribuição de um nome e tipo."
-              mat-button 
-              type="button" 
-              (click)="openAddDialog()">Adicionar Variável</button>
-            </div>
-            <div class="col-md-6">
-              <button 
-              matTooltip="Abre a janela para criação de um texto livre, ou string, para adicionar ao código."
-              mat-button 
-              type="button" 
-              (click)="openAddTextDialog()">Adicionar Texto livre</button>
-            </div>
-          </div>  
+          <div class="col-md-6">
+            <button 
+            class="btn-add-lab"
+            matTooltip="Abre a janela para criação de um texto livre, ou string, para adicionar ao código."
+            mat-button 
+            type="button" 
+            (click)="openAddTextDialog()">Adicionar Texto livre</button>
+          </div>
         </div>
       </div>
     </div>
-    
-    <select name="langs" [(ngModel)]="selectedLang">
-      <option value="" disabled selected>Linguagem</option>
-      <option *ngFor="let lang of langs" [value]="lang">{{ lang }}</option>
-    
-    </select>
-    <button class="btn" type="submit" [disabled]="!isFormValid()">Gerar</button>
-  </form>
-  <pre class="answer overflow-auto" *ngIf="answer">{{ answer }}</pre>
-  <app-chat-window></app-chat-window>
+  </div>
+
+  <div class="lang-container">
+    <mat-form-field appearance="outline" class="lang-select">
+      <mat-label>Linguagem</mat-label>
+      <mat-select name="selectedLang" [(ngModel)]="selectedLang">
+        <mat-option *ngFor="let lang of langs" [value]="lang">{{ lang }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button class="btn-submit" type="submit" [disabled]="!isFormValid() || loading">Gerar</button>    
+  </div>
+</form>
+
+<pre class="answer">{{ answer }}</pre>
+
+<app-chat-window></app-chat-window>

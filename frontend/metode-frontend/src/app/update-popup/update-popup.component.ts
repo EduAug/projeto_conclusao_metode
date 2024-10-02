@@ -26,6 +26,21 @@ export class UpdatePopupComponent {
     this.userData.email= data.email;
   }
 
+  isNameValid(name: string): boolean{
+    //console.log(/\s/g.test(name));
+    return !/\s/g.test(name);
+  }
+
+  isValid(password: string): boolean{
+    const minLength= password.length >= 6;
+    const hasUpper= /[A-Z]/.test(password);
+    const hasLower= /[a-z]/.test(password);
+    const hasNumber= /\d/.test(password);
+    const hasSpecial= /[!@#$%¨&*]/.test(password);
+
+    return minLength && hasUpper && hasLower && hasNumber && hasSpecial;
+  }
+
   onClose(){
     this.dialogRef.close();
   }

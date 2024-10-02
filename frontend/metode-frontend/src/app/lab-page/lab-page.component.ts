@@ -72,6 +72,8 @@ export class LabPageComponent {
 
       this.items.push("MOSTRE");
       this.items.push("`Olá, mundo!`");
+
+      this.answer= "Aguardando código...";
     });
   }
 
@@ -289,13 +291,16 @@ export class LabPageComponent {
   }
 
   //Post para enviar solicitação ao endpoint
-  askGemini() {
+  askGpt() {
+    this.loading= true;
+    this.answer= "Compilando código..."
     this.question="";
     this.items.forEach(e => {
       this.question+= `${e} `;
     });
-    this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays", caso existam no pseudocódigo requisitado, devem ser considerados como listas. "DECLARE", novamente apenas caso constado, representa um input do usuário. ${ this.question }.`)
+    this.gptService.askDQuestion(`Retorne o seguinte em ${ this.selectedLang }, preste atenção nas variáveis, encontram-se entre chaves({}) constando seu nome e tipo portanto retire as chaves quando for instanciar variáveis, e os "arrays", caso existam no pseudocódigo requisitado, devem ser considerados como listas. "DECLARE", novamente apenas caso constado, representa um input do usuário.  ${ this.question }.`)
       .subscribe(rspns=> {
+        this.loading= false;
         let rawresponse = rspns.response;
         if(rawresponse.startsWith('```') && rawresponse.endsWith('```')){
           this.answer= rawresponse.replace(/(^```[\w]*\n|\n```$)/g,'');

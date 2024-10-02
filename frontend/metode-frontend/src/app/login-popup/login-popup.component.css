@@ -39,13 +39,13 @@
 }
 
 .btn-submit:not(:disabled) {
-background-color: #19af20;
-color: white;
+    background-color: #19af20;
+    color: white;
 }
 
 .btn-submit:disabled {
-color: white;
-border: 1px solid white;
+    color: #aff1c3;
+    border: 1px solid white;
 }
 
 .custom-spinner ::ng-deep .mat-progress-spinner circle,

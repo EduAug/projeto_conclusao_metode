@@ -37,15 +37,22 @@
     <div class="password-criterias">
     <b>Sua senha deve conter:</b>
     <p>• Uma letra minúscula • Uma letra maiúscula</p>
-        <p>• Um número • Um caractere especial</p>
-        <p>• E no mínimo 6 dígitos</p>
+    <p>• Um número • Um caractere especial</p>
+    <p>• E no mínimo 6 dígitos</p>
+    <!-- <p>• Seu nome de usuário não pode conter espaços</p> -->
     </div>
 </div>
 
 <mat-dialog-actions align="end" class="dialog-actions">
     <button mat-button class="btn-cancel" (click)="onClose()">Cancelar</button>
     <button mat-button class="btn-submit" 
-        [disabled]="loading || !signupData.email || !signupData.pwd || !signupData.dname || !isValid(signupData.pwd)" 
+        [disabled]="
+        loading ||  
+        !isNameValid(signupData.dname) ||
+        !signupData.email || 
+        !signupData.pwd || 
+        !signupData.dname || 
+        !isValid(signupData.pwd)" 
         (click)="onSubmit()">Cadastrar</button>
     <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="20" class="custom-spinner"></mat-progress-spinner>
 </mat-dialog-actions>
