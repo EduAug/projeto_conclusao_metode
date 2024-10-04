@@ -14,8 +14,7 @@
 }
   
 .btn-submit:disabled {
-    color: white;
-    border: 1px solid white;
+    color: #aff1c3;
 }
 
 h2 {

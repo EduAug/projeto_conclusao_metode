@@ -1,37 +1,114 @@
-.button-group{
-    margin-top: auto;
+/* .header-gradient {
+    background-image: radial-gradient(
+        ellipse farthest-side at 95% 400%,
+        white 21%,
+        white 100%,
+        #aff1c3 35%
+    );
+    width: 100%;
+    height: 100px;
+    position: relative;
+    background-color: #aff1c3;
+} */
+
+.col-md-3 {
+    background-color: #aff1c3;
+    border-radius: 20px 20px 0 0;
+    padding: 25px;
+    margin-top: 16vh;
+    height: 70vh;
 }
 
-.code-square{
+.button-group {
+    display: flex;
+    flex-direction: column;
+    padding-top: 18vh;
+    align-items: center;
+}
+
+.button-group button:not(:disabled):hover {
+    background-color: #70d68f;
+    color: white;
+    border-color: white;
+}
+
+.btn-menu{
+    width: 250px;
+    margin-bottom: 4vh;
+    background-color: white;
+    color: #19af20;
+    border: 1px #19af20 solid;
+    font-size: large;
+}
+
+
+.footer-line {
+    width: 100%;
+    height: 40px;
+    background-color: #aff1c3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.left-part {
+    background-color: #aff1c3;
+    width: 45vw;
+    border-bottom-right-radius: 40px;
+}
+.right-part {
+    background-color: #aff1c3;
+    width: 55vw;
+    height: 7vh;
+}
+
+.col-md-7 {
+    box-sizing: border-box;
+    background-color: #d3f1dc;
+    max-height: 75vh;
+    padding: 30px;
+    margin: 55px;
+    border: 14px solid #cff1d9;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+.code-square {
     background-color: #aff1c3;
     border-radius: 10px;
     height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 15px;
     position: relative;
     transition: all 0.3s ease;
 }
 
-.code-square button{
+.code-square button {
     display: none;
 }
 
-.code-square:hover{
+.code-square:hover {
     background-color: #70d68f;
     transform: scale(1.05);
 }
 
-.code-square:hover button{
+.code-square:hover button {
     display: inline-block;
 }
 
-.col-md-3{
-    height: 50vh;
+.code-square button {
+    margin: 5px 0;
 }
 
-button:disabled{
+button:disabled {
     background-color: grey;
+}
+
+h2{
+    padding-left: 30%;
+    padding-top: 6vh;
+    color: #19af20;
 }

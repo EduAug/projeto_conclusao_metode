@@ -10,7 +10,7 @@
 }
   
 .btn-submit:disabled{
-    color: white;
+    color: #aff1c3;
     border: 1px solid white;
 }
 

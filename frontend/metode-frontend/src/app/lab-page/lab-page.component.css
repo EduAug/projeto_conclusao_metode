@@ -36,8 +36,8 @@
   color: white;
 }
 .btn-submit:disabled {
-  color: #394b3a;
-  background-color: lightgray;
+  color: #aff1c3;
+  border: 1px solid white;
 }
 
 .container-top {
@@ -139,7 +139,7 @@ h3 {
   padding: 5px 10px;
 }
 
-.btn-generate {
+/* .btn-generate {
   width: 200px;
   height: 40px;
   background-color: #aff1c3;
@@ -154,7 +154,7 @@ h3 {
   color: #124214;
   border-radius: 4px;
   transform: scale(1.05);
-}
+} */
 
 .answer {
   font-family: "VT323", monospace;

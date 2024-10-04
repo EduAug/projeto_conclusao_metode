@@ -51,6 +51,11 @@ mat-dialog-actions .btn-cancel>.mat-mdc-button-ripple{
   background-color: white !important;
 }
 
+.custom-spinner 
+::ng-deep .mat-progress-spinner circle,
+::ng-deep .mat-mdc-progress-spinner circle {
+  stroke: rgba(89, 145, 89, 0.349) !important;
+}
 
 /* mat-dialog-actions .btn-submit> .mdc-button__label:not(disabled){
     color: white;
