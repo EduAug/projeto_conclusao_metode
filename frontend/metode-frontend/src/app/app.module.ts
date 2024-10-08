@@ -29,6 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     ChatWindowComponent,
     ManagePageComponent,
     NotificationPopupComponent,
-    UpdatePopupComponent
+    UpdatePopupComponent,
+    LearnMorePageComponent
   ],
   imports: [
     BrowserModule,

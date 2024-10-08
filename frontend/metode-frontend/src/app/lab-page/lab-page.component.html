@@ -1,15 +1,18 @@
 <div class="header-gradient">
-  <div *ngIf="isLogged" class="container-top">
-    <div class="input-container">
-      <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
-      <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
-        {{ loading ? 'Salvando...' : 'Salvar' }}
-      </button>
+  <div class="container-top">
+    <button class="learn-more" routerLink="/learn-more">Aprenda mais</button>
+    <div *ngIf="isLogged">
+      <div class="input-container">
+        <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
+        <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
+          {{ loading ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
     </div>
-
     <app-notification-popup #notif></app-notification-popup>
-
-    <button class="manage-navigate" routerLink="/manage">Retornar</button>
+    <div *ngIf="isLogged">
+      <button class="manage-navigate" routerLink="/manage" [disabled]="loading">Retornar</button>
+    </div>
   </div>
 </div>
 

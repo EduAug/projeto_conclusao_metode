@@ -1,0 +1,27 @@
+<div class="learn-more-container">
+    <h1>Aprenda mais sobre as linguagens disponibilizadas!</h1>
+    <hr>
+    <div class="main-content">
+      <div class="language-section container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-9 lang-rectangle">
+            <div class="row justify-content-center">
+              <div class="col-md-4 p-3 text-center lang-block" *ngFor="let lang of langs">
+                <img [src]="lang.imageUrl" alt="{{ lang.name }} logo" class="lang-img">
+                <h3>{{ lang.name }}</h3>
+                <div>
+                  <button *ngIf="lang.link1" class="btn btn-youtube" (click)="openLink(lang.link1)">YouTube</button>
+                  <button *ngIf="lang.link2" class="btn btn-udemy" (click)="openLink(lang.link2)">Udemy</button>
+                  <button *ngIf="lang.link3" class="btn btn-alura" (click)="openLink(lang.link3)">Alura</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <button class="btn btn-return" routerLink="/lab">Retornar</button>
+    </div>
+  </div>
+  
