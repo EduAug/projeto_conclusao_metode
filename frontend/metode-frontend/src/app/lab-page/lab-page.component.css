@@ -42,11 +42,14 @@
 
 .container-top {
   display: flex;
-  align-items: flex-start;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
 }
 
-.header-gradient {
+/*.header-gradient {
   background-image: radial-gradient(
     ellipse farthest-side at 95% 400%,
     white 21%,
@@ -57,13 +60,12 @@
   height: 100px;
   position: relative;
   background-color: #aff1c3;
-}
+}*/
 
 .input-container {
   display: flex;
   align-items: center;
-  margin-right: auto;
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .input-name {
@@ -81,6 +83,19 @@
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   cursor: grab;
+}
+
+
+.left-part {
+  background-color: #aff1c3;
+  width: 40vw;
+  height: 11.4vh;
+  border-bottom-right-radius: 1.6vw;
+}
+.right-part {
+  background-color: #aff1c3;
+  width: 60vw;
+  height: 7vh;
 }
 
 .cdk-drag-preview {
