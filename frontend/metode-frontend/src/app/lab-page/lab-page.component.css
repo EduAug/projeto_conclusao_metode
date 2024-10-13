@@ -120,6 +120,7 @@
 }
 .learn-more:hover {
   background-color: #70d68f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .list-body {
