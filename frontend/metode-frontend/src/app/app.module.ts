@@ -30,6 +30,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
+import { CodeWindowComponent } from './code-window/code-window.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LearnMorePageComponent } from './learn-more-page/learn-more-page.compon
     ManagePageComponent,
     NotificationPopupComponent,
     UpdatePopupComponent,
-    LearnMorePageComponent
+    LearnMorePageComponent,
+    CodeWindowComponent
   ],
   imports: [
     BrowserModule,

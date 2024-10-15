@@ -122,6 +122,11 @@
   background-color: #70d68f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.learn-more:disabled {
+  background-color: gray;
+  color: rgb(32, 32, 32);
+  border: 2px solid darkgray;
+}
 
 .list-body {
   border: solid 1px #ccc;
@@ -146,6 +151,11 @@
 }
 .manage-navigate:hover {
   background-color: #70d68f;
+}
+.manage-navigate:disabled{
+  background-color: gray;
+  color: rgb(32, 32, 32);
+  border: 2px solid darkgray;
 }
 
 h3 {
@@ -188,17 +198,3 @@ h3 {
   border-radius: 4px;
   transform: scale(1.05);
 } */
-
-.answer {
-  font-family: "VT323", monospace;
-  font-size: 1.25em;
-  background-color: black;
-  color: white;
-  border: 3px solid #444444;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 10px;
-  white-space: pre-wrap;
-  overflow: auto;
-  bottom: 0;
-}

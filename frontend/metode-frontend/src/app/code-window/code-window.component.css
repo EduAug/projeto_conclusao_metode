@@ -1,0 +1,47 @@
+.answer-window {
+    position: fixed;
+    bottom: 0;
+    left: 20px;
+    width: 60vw; 
+    z-index: 100;
+}
+.answer-window:not(.expanded) {
+    height: 48px;
+}
+.answer-window.expanded .answer-body {
+    height: 500px;
+} 
+
+.answer-body {
+    height: 60px;
+    font-family: "VT323", monospace;
+    font-size: 1.25em;
+    background-color: black;
+    color: white;
+    border: 3px solid #444444;
+    padding: 10px 15px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    overflow: auto;
+    bottom: 0; 
+}
+.answer-body.expanded {
+    box-shadow: 6px 6px 22px black;
+}
+ 
+
+.loading-indicator{
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    color: grey;
+}
+
+hr {
+    width: 60%;
+    margin: 0 auto;
+}
+
+code { 
+    color: white;
+}

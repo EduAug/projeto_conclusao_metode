@@ -4,7 +4,7 @@
       <div class="right-part"></div>
   </div>
   <div class="container-top">
-    <button class="learn-more" routerLink="/learn-more">Aprenda mais</button>
+    <button class="learn-more" [disabled]="loading" routerLink="/learn-more">Aprenda mais</button>
     <div *ngIf="isLogged">
       <div class="input-container">
         <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
@@ -90,6 +90,5 @@
   </div>
 </form>
 
-<pre class="answer">{{ answer }}</pre>
-
+<app-code-window [answer]="answer"></app-code-window>
 <app-chat-window></app-chat-window>

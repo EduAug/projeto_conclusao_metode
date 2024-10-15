@@ -1,0 +1,5 @@
+<div class="answer-window" [ngClass]="{ 'expanded': isExpanded }">
+    <div (click)="toggleExpand()" class="answer-body m-1" >
+        <code (click)="$event.stopPropagation()" class="answer">{{ answer }}</code>
+    </div>
+</div>

@@ -10,6 +10,9 @@
     z-index: 100;
 }
 
+.chat-window.expanded {
+    box-shadow: 6px 14px 22px black;
+}
 .chat-window:not(.expanded) {
     height: 48px;
 }

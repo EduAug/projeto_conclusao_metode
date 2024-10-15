@@ -4,8 +4,6 @@
     flex-direction: column;
     min-height: 100vh;
     background-color: #aff1c3;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
 }
 
 .main-content {
@@ -89,10 +87,24 @@
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-  
+
+.btn-docs {
+    height: 40px;
+    border: 1px solid rgb(105, 175, 218);
+    color: rgb(105, 175, 218);
+    padding: 0 20px;
+    border-radius: 4px;
+}
+.btn-docs:hover {
+    background-color: lightskyblue;
+    border: lightskyblue;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 .footer {
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
 }
   

@@ -47,6 +47,7 @@
     height: 100%;
     background-color: #aff1c3;
     z-index: 1;
+    border-bottom-right-radius: 2vw;
     /*box-shadow: 3px 0px 25px -3px rgb(167, 167, 167);*/
 }
 
@@ -58,6 +59,17 @@
     height: 100%;
     background-color: white;
     z-index: 0;
+}
+.bg-white::before {
+  content: "";
+  position: absolute;
+  
+  background-color: white;
+  height: 50px;
+  width: 25px;
+  border-top-left-radius: 4vw;
+
+  box-shadow: 0 -25px 0 0 #aff1c3;
 }
 
 .content {

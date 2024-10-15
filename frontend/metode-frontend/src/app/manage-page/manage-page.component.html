@@ -34,10 +34,13 @@
                 <div *ngFor="let code of savedCodes" class="col-lg-3 col-md-4 col-sm-6 p-2">
                     <div class="code-square p-3 text-center" (mouseenter)="hover=true" (mouseleave)="hover=false">
                         <h5>{{ code.titulo }}</h5>
-                            <div *ngIf="hover" class="mt-3">
+                            <div *ngIf="hover;else else_content" class="mt-3">
                                 <button class="btn btn-success me-2" (click)="editCode(code.id, code.titulo)">Editar</button>
                                 <button class="btn btn-danger" (click)="deleteCode(code.id)">Deletar</button>
                             </div>
+                            <ng-template #else_content>
+                                <p></p>
+                            </ng-template>
                     </div>
                 </div>
             </div>
