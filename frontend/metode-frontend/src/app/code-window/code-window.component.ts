@@ -1,5 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewChecked, Input} from '@angular/core';
-import { GeminiService } from '../gemini.service';
+import { Component, ElementRef, ViewChild, Input} from '@angular/core';
 
 @Component({
   selector: 'app-code-window',

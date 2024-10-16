@@ -104,7 +104,9 @@
 }
 
 button:disabled {
-    background-color: grey;
+    background-color: #aff1c3;
+    border-color: white;
+    color: white;
 }
 
 h2{
