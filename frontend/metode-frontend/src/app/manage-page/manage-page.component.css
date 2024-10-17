@@ -53,12 +53,12 @@
 
 .left-part {
     background-color: #aff1c3;
-    width: 45vw;
+    width: 45%;
     border-bottom-right-radius: 40px;
 }
 .right-part {
     background-color: #aff1c3;
-    width: 55vw;
+    width: 55%;
     height: 7vh;
 }
 
