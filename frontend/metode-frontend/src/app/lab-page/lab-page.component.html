@@ -42,7 +42,7 @@
             matTooltip="Aqui será uma representação do seu código. É possível arrastar os itens para organizar como desejas. Clique em um item para removê-lo."
             ></i>
         </h3>
-        <div id="userCode" cdkDropList #itemList="cdkDropList" [cdkDropListData]="items" [cdkDropListConnectedTo]="[secondList, thirdList]" (cdkDropListDropped)="drop($event)" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterCodeList">
+        <div id="userCode" cdkDropList #itemList="cdkDropList" [cdkDropListData]="items" [cdkDropListConnectedTo]="[secondList, thirdList]" (cdkDropListDropped)="drop($event)" class="list-body list-overheight overflow-auto" [cdkDropListEnterPredicate]="canEnterCodeList">
           <div (click)="removeItem(i)" class="item" *ngFor="let item of items; let i= index" cdkDrag>{{ item }}</div>
         </div>
       </div>
@@ -54,7 +54,7 @@
             matTooltip="Aqui estão suas variáveis. Representam valores que serão utilizados para compor o código. Arraste uma variável e largue sobre o código onde desejar. Clique duplo em um item para removê-lo das variáveis e do código."
             ></i>
         </h3>
-        <div id="variables" cdkDropList #secondList="cdkDropList" [cdkDropListData]="vars" [cdkDropListConnectedTo]="[itemList]" (cdkDropListDropped)="drop($event)" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
+        <div id="variables" cdkDropList #secondList="cdkDropList" [cdkDropListData]="vars" [cdkDropListConnectedTo]="[itemList]" (cdkDropListDropped)="drop($event)" class="list-body list-overheight overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
           <div (dblclick)="removeVar(vari)" class="vari" *ngFor="let vari of vars" cdkDrag>{{ vari }}</div>
         </div>
         <div class="row text-center">

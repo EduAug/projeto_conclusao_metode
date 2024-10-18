@@ -2,7 +2,7 @@
     <h2 class="title" *ngIf="!isDeletion">Login</h2>
     <h2 class="title" *ngIf="isDeletion">Confirme suas credenciais</h2>
     <app-notification-popup #notif></app-notification-popup>
-    <div class="login-container">
+    <div>
         <mat-form-field appearance="outline" class="form-field email-field">
             <mat-label>Email</mat-label>
             <input matInput [(ngModel)]="loginData.email" placeholder="Email" required>
