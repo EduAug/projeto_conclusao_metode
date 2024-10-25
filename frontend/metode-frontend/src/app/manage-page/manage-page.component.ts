@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NotificationPopupComponent } from '../notification-popup/notification-popup.component';
 import { LoginPopupComponent } from '../login-popup/login-popup.component';
 import { UpdatePopupComponent } from '../update-popup/update-popup.component';
+import { ConfirmDeletePopupComponent } from '../confirm-delete-popup/confirm-delete-popup.component';
 
 @Component({
   selector: 'app-manage-page',
@@ -50,18 +51,24 @@ export class ManagePageComponent{
   }
 
   deleteCode(codeId: number){
-    this.apiService.deleteCode(codeId).subscribe(
-      (rspns)=>{
-        //Passa um filtro na lista, removendo aquele("S"?) cuja id
-        //sejam a mesma do deletado
-        this.savedCodes= this.savedCodes.filter(cd=> cd.id !== codeId);
-        this.notif.showMessage("Código deletado!", "success");
-      },
-      (error)=> {
-        console.error("Erro ao deletar código:",error);
-        this.notif.showMessage("Erro ao deletar código. Tente novamente.", "error");
+    const dialogRef= this.dialog.open(ConfirmDeletePopupComponent);
+
+    dialogRef.afterClosed().subscribe((confirm: boolean)=> {
+      if(confirm){
+        this.apiService.deleteCode(codeId).subscribe(
+          (rspns)=>{
+            //Passa um filtro na lista, removendo aquele("S"?) cuja id
+            //sejam a mesma do deletado
+            this.savedCodes= this.savedCodes.filter(cd=> cd.id !== codeId);
+            this.notif.showMessage("Código deletado!", "success");
+          },
+          (error)=> {
+            console.error("Erro ao deletar código:",error);
+            this.notif.showMessage("Erro ao deletar código. Tente novamente.", "error");
+          }
+        )
       }
-    )
+    });
   }
 
   logout(){
@@ -96,16 +103,13 @@ export class ManagePageComponent{
     const dialogRef= this.dialog.open(LoginPopupComponent, {
       data: { isDeletion: true }
     });
-
     dialogRef.afterClosed().subscribe(
       (res)=>{
+        this.loading= false;
         if (res && res.success){
           this.apiService.deleteAccount().subscribe(
             (rspns)=>{
-              this.notif.showMessage("Conta deletada com sucesso", "success");
-              setTimeout(() => {
-                this.logout();
-              }, 700);
+              this.logout();
             },
             (error)=>{
               this.notif.showMessage("Erro ao deletar conta", "error");

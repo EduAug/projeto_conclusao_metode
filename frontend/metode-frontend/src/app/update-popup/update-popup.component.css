@@ -48,3 +48,13 @@ h2 {
 .custom-spinner ::ng-deep .mat-mdc-progress-spinner circle {
     stroke: rgba(89, 145, 89, 0.349) !important;
 }
+
+.password-criterias {
+  margin-top: 15px;
+}
+.password-criterias p{
+  margin: 0 auto;
+}.password-criterias b{
+  margin: 0 auto;
+  margin-bottom: 10px;
+}

@@ -31,6 +31,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 import { CodeWindowComponent } from './code-window/code-window.component';
+import { ConfirmDeletePopupComponent } from './confirm-delete-popup/confirm-delete-popup.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CodeWindowComponent } from './code-window/code-window.component';
     NotificationPopupComponent,
     UpdatePopupComponent,
     LearnMorePageComponent,
-    CodeWindowComponent
+    CodeWindowComponent,
+    ConfirmDeletePopupComponent
   ],
   imports: [
     BrowserModule,

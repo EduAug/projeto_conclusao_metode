@@ -21,6 +21,13 @@
             required>
         <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
     </mat-form-field>
+
+    <div class="text-center password-criterias">
+        <b>Sua senha deve conter:</b>
+        <p>• Uma letra minúscula • Uma letra maiúscula</p>
+        <p>• Um número • Um caractere especial</p>
+        <p>• E no mínimo 6 dígitos</p>
+    </div>
 </div>
 <mat-dialog-actions align="center" class="dialog-actions">
     <button mat-button class="btn-cancel" (click)="onClose()">Cancelar</button>
