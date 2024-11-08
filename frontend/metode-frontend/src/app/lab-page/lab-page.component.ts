@@ -35,6 +35,7 @@ export class LabPageComponent {
   isLogged: boolean= false;
   firstSave: boolean= true;
   loading: boolean= false;
+  saving: boolean= false;
 
   selectedLang: string= "";
   question: string= "";
@@ -326,6 +327,7 @@ export class LabPageComponent {
 
   saveCode(){
     this.loading= true;
+    this.saving= true;
     const payload= {
       title: this.codeTitulo,
       varis: this.vars,
@@ -336,12 +338,14 @@ export class LabPageComponent {
       this.gptService.saveCode(payload).subscribe(
         (rspns)=> {
           this.loading= false;
+          this.saving= false;
           this.firstSave= false;
           this.codeId= rspns.id;
           this.notif.showMessage("Código salvo com sucesso", "success");
         },
         (error)=> {
           this.loading= false;
+          this.saving= false;
           this.notif.showMessage("Erro ao salvar código", "error");
         }
       );
@@ -349,11 +353,13 @@ export class LabPageComponent {
       if(this.codeId){
         this.gptService.updateCode(this.codeId, payload).subscribe(
           (rspns)=> {
-            this.loading= false;
+          this.saving= false;
+          this.loading= false;
             this.notif.showMessage("Código atualizado com sucesso", "success");
           },
           (error)=> {
-            this.loading= false;
+          this.saving= false;
+          this.loading= false;
             this.notif.showMessage("Erro ao atualizar código", "error");
           }
         )

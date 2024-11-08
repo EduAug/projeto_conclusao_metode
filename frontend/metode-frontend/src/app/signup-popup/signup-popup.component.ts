@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { GeminiService } from '../gemini.service';
 import { Router } from '@angular/router';
+import { NotificationPopupComponent } from '../notification-popup/notification-popup.component';
 
 @Component({
   selector: 'app-signup-popup',
@@ -16,6 +17,8 @@ export class SignupPopupComponent {
   };
   loading: boolean= false;
   isPasswordVisible: boolean= false;
+
+  @ViewChild(NotificationPopupComponent) notif!: NotificationPopupComponent;
 
   constructor(
     public route: Router,
@@ -48,28 +51,23 @@ export class SignupPopupComponent {
       error: ()=> {
         this.loading= false;
         console.error("Failed signup");
+        this.notif.showMessage("Erro ao cadastrar. Esse email já está em uso.", "error");
       }
     });
   }
 
   isNameValid(name: string): boolean{
-    //console.log(/\s/g.test(name));
     return !/\s/g.test(name);
   }
   
   isValid(password: string): boolean{
-    //console.log("Origin: ",password);
     const minLength= password.length >= 6;
-    //console.log("Minimo 6?",minLength);
     const hasUpper= /[A-Z]/.test(password);
-    //console.log("Tem maiuscula?",hasUpper);
     const hasLower= /[a-z]/.test(password)
-    //console.log("Tem minuscula?",hasLower);
     const hasNumber= /\d/.test(password);
-    //console.log("Tem numero?",hasNumber);
     const hasSpecial= /[!@#$%¨&*]/.test(password);
-    //console.log("Tem especial?",hasSpecial);
+    const hasNoWhitespace= !/\s/.test(password);
 
-    return minLength && hasUpper && hasLower && hasNumber && hasSpecial;
+    return minLength && hasUpper && hasLower && hasNumber && hasSpecial && hasNoWhitespace;
   }
 }

@@ -11,7 +11,8 @@
 }
 
 .chat-window.expanded {
-    box-shadow: 6px 14px 22px black;
+    border: 1px solid grey;
+    box-shadow: 6px 14px 5px lightgray;
 }
 .chat-window:not(.expanded) {
     height: 48px;

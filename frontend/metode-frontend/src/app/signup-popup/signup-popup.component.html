@@ -1,4 +1,5 @@
 <h2 class="title">Cadastrar</h2>
+<app-notification-popup #notif></app-notification-popup>
 <div class="signup-container container-fluid">
     <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
@@ -22,7 +23,7 @@
     </mat-form-field>
 
     <mat-password-strength
-        class="password-meter green"
+        class="green"
         [password]="signupData.pwd"
         [min]="6"
         [enableUpperCaseLetterRule]="true"
@@ -35,7 +36,7 @@
     ></mat-password-strength>
 
     <div class="password-criterias">
-        <b>Seu nome de usuário não deve conter espaços</b><br>
+        <b>Seu nome de usuário e senha não deve conter espaços</b><br>
         <b>Sua senha deve conter:</b>
         <p>• Uma letra minúscula • Uma letra maiúscula</p>
         <p>• Um número • Um caractere especial</p>

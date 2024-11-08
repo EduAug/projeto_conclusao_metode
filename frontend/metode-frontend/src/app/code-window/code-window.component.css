@@ -10,6 +10,7 @@
 }
 .answer-window.expanded .answer-body {
     height: 500px;
+    box-shadow: -10px 10px 5px darkgray;
 } 
 
 .answer-body {
@@ -24,6 +25,7 @@
     white-space: pre-wrap;
     overflow: auto;
     bottom: 0; 
+    transition: 0.3s ease-in-out;
 }
 .answer-body.expanded {
     box-shadow: 6px 6px 22px black;

@@ -64,7 +64,7 @@ export class LoginPopupComponent {
         
         setTimeout(()=>{
           this.loginFailed= false;
-        }, 5000);
+        }, 3000);
       }
     )
   }

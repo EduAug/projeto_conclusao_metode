@@ -9,12 +9,12 @@
       <div class="input-container">
         <input class="input-name" type="text" [(ngModel)]="codeTitulo" placeholder="Nome do projeto">
         <button class="btn btn-save" [disabled]="items.length === 0 || !codeTitulo || loading" (click)="saveCode()">
-          {{ loading ? 'Salvando...' : 'Salvar' }}
+          {{ saving ? 'Salvando...' : 'Salvar' }}
         </button>
       </div>
     </div>
     <app-notification-popup #notif></app-notification-popup>
-    <div *ngIf="isLogged">
+    <div>
       <button class="manage-navigate" routerLink="/manage" [disabled]="loading">Retornar</button>
     </div>
   </div>
@@ -27,10 +27,12 @@
         <h3>Operações e Funções Padrão
           <i 
             class="bi bi-question-circle" 
-            matTooltip="Aqui estão as operações padrão. Tanto matemáticas, quanto lógicas, caso não encontre variáveis em alguma operação, provavelmente aquele tipo não seja suportado. Clique para adicionar ao código, ou abrir uma janela de criação, com base na operação."
+            matTooltip=
+            "Representação das operações padrão. Matemáticas, lógicas, atribuição e alteração de valor, e ações em listas. 
+            Clique para adicionar ao código, ou abrir uma janela de criação, com base na operação."
             ></i>
         </h3>
-        <div cdkDropList #thirdList="cdkDropList" [cdkDropListData]="operations" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
+        <div id="operations" cdkDropList #thirdList="cdkDropList" [cdkDropListData]="operations" class="list-body overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
           <div (click)="addFunctionToCode(operacao)" class="functoper" *ngFor="let operacao of operations" cdkDragDisabled="true">{{ operacao }}</div>
         </div>
       </div>
@@ -39,7 +41,7 @@
         <h3>Código
           <i 
             class="bi bi-question-circle" 
-            matTooltip="Aqui será uma representação do seu código. É possível arrastar os itens para organizar como desejas. Clique em um item para removê-lo."
+            matTooltip="Seu `pseudocódigo`. É possível arrastar os itens para organizar como desejas. Clique em um item para removê-lo."
             ></i>
         </h3>
         <div id="userCode" cdkDropList #itemList="cdkDropList" [cdkDropListData]="items" [cdkDropListConnectedTo]="[secondList, thirdList]" (cdkDropListDropped)="drop($event)" class="list-body list-overheight overflow-auto" [cdkDropListEnterPredicate]="canEnterCodeList">
@@ -51,7 +53,7 @@
         <h3>Variáveis
           <i 
             class="bi bi-question-circle" 
-            matTooltip="Aqui estão suas variáveis. Representam valores que serão utilizados para compor o código. Arraste uma variável e largue sobre o código onde desejar. Clique duplo em um item para removê-lo das variáveis e do código."
+            matTooltip="Aqui estão suas variáveis, valores que serão utilizados para compor o código. Arraste e largue sobre o código onde desejar. Clique duplo em um item para removê-lo."
             ></i>
         </h3>
         <div id="variables" cdkDropList #secondList="cdkDropList" [cdkDropListData]="vars" [cdkDropListConnectedTo]="[itemList]" (cdkDropListDropped)="drop($event)" class="list-body list-overheight overflow-auto" [cdkDropListEnterPredicate]="canEnterVariableOperationList">
