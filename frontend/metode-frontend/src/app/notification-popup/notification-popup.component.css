@@ -15,6 +15,7 @@
     background-color: #aff1c3;
     border: 2px solid #287e42;
     color: #287e42;
+    margin-top: 80px;
 }
 .notification.error{
     background-color: rgb(148, 33, 42);

@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GeminiService } from '../gemini.service';
 import { Router } from '@angular/router';
+import { NotificationPopupComponent } from '../notification-popup/notification-popup.component';
 
 @Component({
   selector: 'app-update-popup',
@@ -10,11 +11,13 @@ import { Router } from '@angular/router';
 })
 export class UpdatePopupComponent {
   userData={
-    dname: "",
     email: "",
+    dname: "",
     pwd: ""
   };
   loading: boolean= false;
+
+  @ViewChild(NotificationPopupComponent) notif!: NotificationPopupComponent;
 
   constructor(
     public dialogRef: MatDialogRef<UpdatePopupComponent>,
@@ -27,7 +30,6 @@ export class UpdatePopupComponent {
   }
 
   isNameValid(name: string): boolean{
-    //console.log(/\s/g.test(name));
     return !/\s/g.test(name);
   }
 
@@ -55,6 +57,7 @@ export class UpdatePopupComponent {
       (error)=> {
         this.loading= false;
         console.error("Erro ao atualizar dados");
+        this.notif.showMessage("Erro ao cadastrar. Email já está em uso.", "error");
       }
     )
   }
